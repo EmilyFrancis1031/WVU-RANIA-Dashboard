@@ -6,3 +6,8 @@ body {
 a {
   color: #00B7FF;
 }
+
+div.login {
+  display:flex;
+  justify-content: center;
+}
