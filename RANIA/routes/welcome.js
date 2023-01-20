@@ -6,7 +6,7 @@ var wp = path.join("Welcome_Page", "welcome")
 
 /* GET welcome page. */
 router.get('/', function(req, res, next) {
-  res.render('Welcome_Page/welcome', { title: 'RANIA Dashboard' });
+  res.render(wp, { title: 'RANIA Dashboard' });
 });
 
 module.exports = router;
