@@ -2,11 +2,11 @@ var express = require('express');
 var router = express.Router();
 
 var path = require("path");
-var wp = path.join("Welcome", "welcome")
+var sp = path.join("Settings", "settings")
 
 /* GET welcome page. */
 router.get('/', function(req, res, next) {
-  res.render(wp, { title: 'RANIA' });
+  res.render(sp, { title: 'RANIA' });
 });
 
 module.exports = router;

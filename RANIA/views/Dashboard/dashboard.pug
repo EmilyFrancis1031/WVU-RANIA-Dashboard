@@ -1,0 +1,28 @@
+extends layout 
+block head 
+    title=title 
+
+block navbar1
+    nav 
+        a(href="/welcome") Home
+        a(href="/dashboard") Dashboard
+        a(href="/agenda") Agenda
+        a(href="/settings") Settings
+        a(href="/") Logout
+
+block content 
+    h1="Devices will be listed here, but for now there will be example data."
+    p 
+    table
+        tr 
+            td="Device"
+            td="Status"
+        tr 
+            td="Google Home Nest"
+            td="Connected"
+        tr 
+            td="Ring Doorbell"
+            td="Conencted"
+        tr 
+            td="Smart Thermostat"
+            td="Disconnected"

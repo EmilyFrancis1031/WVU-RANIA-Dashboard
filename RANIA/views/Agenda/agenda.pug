@@ -1,0 +1,15 @@
+extends layout 
+block head 
+    title=title 
+
+block navbar
+    nav 
+        a(href="/welcome") Home
+        a(href="/dashboard") Dashboard
+        a(href="/agenda") Agenda
+        a(href="/settings") Settings
+        a(href="/") Logout
+
+block content
+    h1 The resident's agenda will be displayed on this page.
+    button(type="button") Modify Agenda 

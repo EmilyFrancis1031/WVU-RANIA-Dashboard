@@ -1,0 +1,24 @@
+extends layout 
+block head 
+    title=title 
+
+block navbar1
+    nav 
+        a(href="/welcome") Home
+        a(href="/dashboard") Dashboard
+        a(href="/agenda") Agenda
+        a(href="/settings") Settings
+        a(href="/") Logout
+
+block navbar2 
+    nav 
+        a(href="") Add Device
+        a(href="") Remove Device
+        a(href="") Edit Smart Device
+        a(href="") Edit Resident Information
+        a(href="") Edit Contact Information
+        a(href="") Send Data to...
+
+block content
+    h1 The resident's agenda will be displayed on this page.
+    button(type="button") Modify Agenda 
