@@ -1,0 +1,28 @@
+.dbContainer {
+    background-color: #6B351D;
+  }
+  
+  .dbHeading {
+    color: #A07F6B;
+  }
+  
+  .dbDevice {
+    color: #D3C3BA;
+    background-color: #6B351D;
+    border: 1px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 25px;
+    padding-right: 50px;
+  }
+  
+  .dbButton {
+    color: #C89A44;
+    background-color: #6B351D;
+    border: 0px;
+  }
+  
+  .dbContent {
+    color: #D3C3BA
+  }
+  
