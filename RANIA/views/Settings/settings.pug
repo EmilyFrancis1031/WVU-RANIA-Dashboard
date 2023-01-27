@@ -11,14 +11,11 @@ block navbar1
         a(href="/") Logout
 
 block navbar2 
-    nav 
-        a(href="") Add Device
-        a(href="") Remove Device
-        a(href="") Edit Smart Device
-        a(href="") Edit Resident Information
-        a(href="") Edit Contact Information
-        a(href="") Send Data to...
-
-block content
-    h1 The resident's agenda will be displayed on this page.
-    button(type="button") Modify Agenda 
+    div.btn-group
+        button(onclick="/settings/addDevice") Add Device
+        button(onclick="/settings/removeDevice") Remove Device
+        button(onclick="/settings/editSmartDevice") Edit Smart Devices
+    div.btn-group
+        button(onclick="/settings/editResident") Edit Resident Information
+        button(onclick="/settings/editContact") Edit Contact Information
+        button(onclick="/settings/exportData") Export Data

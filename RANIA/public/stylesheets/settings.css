@@ -1,0 +1,14 @@
+button {
+    font-size: 36px;
+    padding: 50px 50px;
+    inline-size: 100px;
+    overflow-wrap: break-word;
+    height: 200px;
+    width: 400px;
+    background-color: #6B351D;
+    color: yellow;
+    margin-top: 0px;
+}
+body{
+    background-color: #1E0200;
+}
