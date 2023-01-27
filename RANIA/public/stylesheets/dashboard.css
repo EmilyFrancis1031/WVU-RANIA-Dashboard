@@ -1,17 +1,17 @@
 .dbBackground{
-    background-color: #1E0200;
+    background-color: #002855;
 }
 .dbContainer {
-    background-color: #6B351D;
+    background-color: #1C2B39;
   }
   
   .dbHeading {
-    color: #A07F6B;
+    color: #FFE539;
   }
   
   .dbDevice {
-    color: #D3C3BA;
-    background-color: #6B351D;
+    color: #BEB7B3;
+    background-color: #1C2B39;
     border: 1px;
     border-style: solid;
     border-color: black;
@@ -20,12 +20,12 @@
   }
   
   .dbButton {
-    color: #C89A44;
-    background-color: #6B351D;
+    color: #0062A3;
+    background-color: #1C2B39;
     border: 0px;
   }
   
   .dbContent {
-    color: #D3C3BA
+    color: #BEB7B3
   }
   
