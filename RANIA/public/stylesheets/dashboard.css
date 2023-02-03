@@ -141,6 +141,7 @@ ul ul {
 small {
     font-size: 0.875em;
 }
+/*
 a {
     color: #0d6efd;
     text-decoration: underline;
@@ -225,6 +226,7 @@ button:not(:disabled) {
 [hidden] {
     display: none !important;
 }
+*/
 .container,
 .container-fluid,
 .container-lg,
@@ -389,11 +391,12 @@ button:not(:disabled) {
     background-color: #0dcaf0;
     border-color: #0dcaf0;
 }
-.btn-info:hover {
+/*.btn-info:hover {
     color: #000;
     background-color: #31d2f2;
     border-color: #25cff2;
 }
+*/
 .btn-info:focus {
     color: #000;
     background-color: #31d2f2;
@@ -1144,12 +1147,13 @@ color:#BEB7B3;
                     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
                     color: #BEB7B3;
                     border-color: black;
-                    :hover {
+}
+                    .db-button:hover {
                         color: #fff;
                         background-color: #0d6efd;
                         border-color: #0d6efd;
                     }
-}
+
                 
 .nav-title{
 color:white;
