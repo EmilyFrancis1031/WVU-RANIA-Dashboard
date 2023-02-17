@@ -4,7 +4,7 @@ var router = express.Router();
 var path = require("path");
 var dbp = path.join("Dashboard", "dashboard")
 
-/* GET welcome page. */
+/* GET dashboard page. */
 router.get('/', function(req, res, next) {
   res.render(dbp, { title: 'RANIA - Dashboard' });
 });
