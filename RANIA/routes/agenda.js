@@ -9,4 +9,8 @@ router.get('/', function(req, res, next) {
   res.render(ap, { title: 'RANIA - Resident Agenda' });
 });
 
+router.get('/modify', (req, res) => {
+  res.send('Ability to modify agenda');
+});
+
 module.exports = router;
