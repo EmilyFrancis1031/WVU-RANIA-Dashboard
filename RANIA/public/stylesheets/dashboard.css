@@ -1,3 +1,4 @@
+
 @charset "UTF-8"; /*!
 * Start Bootstrap - SB Admin v7.0.5 (https://startbootstrap.com/template/sb-admin)
 * Copyright 2013-2022 Start Bootstrap
@@ -19,8 +20,8 @@
     --bs-dark-rgb: #1c2b39;
     --bs-white-rgb: #ffe539;
     --bs-black-rgb: 0, 0, 0;
-    --bs-body-color-rgb: 33, 37, 41;
-    --bs-body-bg-rgb: #002855;
+    --bs-body-color-rgb: 0,0,0;
+    --bs-body-bg-rgb: #000000;
     --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
@@ -29,7 +30,7 @@
     --bs-body-font-weight: 400;
     --bs-body-line-height: 1.5;
     --bs-body-color: #ffe539;
-    --bs-body-bg: #002855;
+    --bs-body-bg: #1C2B39;
 }
 *,
 ::after,
@@ -46,7 +47,7 @@ body {
     font-family: var(--bs-body-font-family);
     font-weight: var(--bs-body-font-weight);
     line-height: var(--bs-body-line-height);
-    color: var(--bs-body-color);
+    color: #ffffcc;
     text-align: var(--bs-body-text-align);
     background-color: var(--bs-body-bg);
     -webkit-text-size-adjust: 100%;
@@ -1113,9 +1114,8 @@ button:not(:disabled) {
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
-    border-radius: 0.25rem;
 	margin-bottom:20px;
-	background-color:#1C2B39
+	background-color:#2d4e62
 	
 }
 .schedule-table{
@@ -1139,19 +1139,23 @@ color:#BEB7B3;
                     line-height: 1.5;
                     text-align: center;
 					margin-top:10px;
+                    margin-bottom:15px;
                     background-color: transparent;
                     border: 1px solid transparent;
                     padding: 6px 12px;
                     font-size: 24px;
-                    border-radius: .25rem;
+                    
                     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
                     color: #BEB7B3;
                     border-color: black;
 }
                     .db-button:hover {
                         color: #fff;
-                        background-color: #0d6efd;
-                        border-color: #0d6efd;
+                        background-color: #f1c232;
+                        border-color: #445577;
+                      box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);
+-webkit-box-shadow: 5px 5px 0px 0px rgba(0,0,0,1);
+-moz-box-shadow: 5px 5px 0px 0px rgba(0,0,0,1);
                     }
 
                 
@@ -1168,18 +1172,20 @@ display: block;
 .card > hr {
     margin-right: 0;
     margin-left: 0;
-	box-shadow: 0px 0px 5px 4px rgba(0,0,0,1);
+	box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);
+-webkit-box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);
+-moz-box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);
 }
 .card-text{
 	font-size:24px;
-		background-color:#1C2B39;
+		background-color:#2d4e62;
 }
-.card-body {
+.card-body {416788
     padding: 1rem 1rem;
-		background-color:#1C2B39;
+		background-color:#2d4e62;
 }
 .card-title {
-	background-color:#1C2B39;
+	background-color:#2d4e62;
     margin-bottom: 0.5rem;
 }
 .card-link + .card-link {
@@ -1189,7 +1195,7 @@ display: block;
     padding: 0.5rem 1rem;
 
     border-top: 1px solid rgba(0, 0, 0, 0.125);
-		background-color:#1C2B39;
+		background-color:#2d4e62;
 }
 #current_date{
 	margin-top:0px;
@@ -1204,8 +1210,10 @@ display: block;
 .scheduleCard {
 
     --bs-bg-opacity: 1;
-	box-shadow: 0px 0px 5px 4px rgba(0,0,0,1);
-    background-color: #1C2B39 !important;
+	box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);
+-webkit-box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);
+-moz-box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);
+    background-color: #2d4e62 !important;
     height: 100%;
     box-sizing: content-box;
     white-space: nowrap;
@@ -1222,7 +1230,9 @@ display: block;
 }
 .deviceListCard {
     --bs-bg-opacity: 1;
-	box-shadow: 0px 0px 5px 4px rgba(0,0,0,1);
+	box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);
+-webkit-box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);
+-moz-box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);
     box-sizing: content-box;
     white-space: nowrap;
     font-size: 52px;
@@ -1233,17 +1243,21 @@ display: block;
     box-sizing: content-box;
     white-space: nowrap;
     font-size: 52px;
-    	background-color:#1C2B39;
+    	background-color:#2d4e62;
 
-	box-shadow: 0px 0px 5px 4px rgba(0,0,0,1);
+	box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);
+-webkit-box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);
+-moz-box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);
 }
 .agendaCard {
     --bs-bg-opacity: 1;
-	box-shadow: 0px 0px 5px 4px rgba(0,0,0,1);
+	box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);
+-webkit-box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);
+-moz-box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);
     box-sizing: content-box;
     white-space: nowrap;
     font-size: 32px;
-    	background-color:#1C2B39;
+    	background-color:#2d4e62;
 	text-align: center;
 	
 }
@@ -1251,18 +1265,22 @@ display: block;
     --bs-bg-opacity: 1;
     box-sizing: content-box;
     white-space: nowrap;
-	box-shadow: 0px 0px 5px 4px rgba(0,0,0,1);
+	box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);
+-webkit-box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);
+-moz-box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);
     font-size: 32px;
-    background-color: #1C2B39!important;
+    background-color: #2d4e62!important;
 	text-align: center;
 }
 .logoutCard {
     --bs-bg-opacity: 1;
     box-sizing: content-box;
     white-space: nowrap;
-	box-shadow: 0px 0px 5px 4px rgba(0,0,0,1);
+	box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);
+-webkit-box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);
+-moz-box-shadow: 10px 10px 0px 0px rgba(0,0,0,1);
     font-size: 32px;
-    background-color: #1C2B39 !important;
+    background-color: #2d4e62 !important;
 	text-align: center;
 }
 body,
