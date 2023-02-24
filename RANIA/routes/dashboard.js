@@ -6,11 +6,11 @@ var dbp = path.join("Dashboard", "dashboard")
 var dbpWizard = path.join("Wizards", "devices", "devices")
 
 /* GET dashboard page. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.render(dbp, { title: 'RANIA - Dashboard' });
 });
 
-router.get('/Wizards/devices', (req, res) => {
+router.get('/wizards/devices', (req, res) => {
   res.render(dbpWizard, { title: 'Devices List' });
 });
 
