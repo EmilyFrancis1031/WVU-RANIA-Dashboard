@@ -10,8 +10,8 @@ router.get('/', function (req, res, next) {
   res.render(dbp, { title: 'RANIA - Dashboard' });
 });
 
-router.get('/wizards/devices', (req, res) => {
-  res.render(dbpWizard, { title: 'Devices List' });
-});
+test_db.onReady = function() {
+  console.log('database is ready for operating');
+}
 
 module.exports = router;
