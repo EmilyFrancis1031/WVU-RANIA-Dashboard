@@ -41,5 +41,5 @@ export function receive_data(data_packet) {
     errorcode = format
   }
   //send status code and message to requestor*/
-  return
+  return message_list[errorcode]
 }
