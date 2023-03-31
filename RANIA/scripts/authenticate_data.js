@@ -3,7 +3,7 @@
 //update this function as you see fit
 //THIS NEEDS TO CHANGE FOR CONNECTING THE DEVICE
 import TinyDB from "tinydb"
-function authenticate_data(data_packet) {
+export function authenticate_data(data_packet) {
     
     var errorcode = 100
 

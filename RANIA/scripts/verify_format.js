@@ -1,6 +1,6 @@
 //This function verifies that the data_packet is in a valid format and returns an error code based on certain conditions
 //Called by 01: receive_data
-function verify_format(data_packet) {
+export function verify_format(data_packet) {
     errorcode = 200
 
     //if data_packet['meta_data'] exists then:
