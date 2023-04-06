@@ -14,5 +14,8 @@
     "205": "data_packet['meta_data']['instruction'] is not a valid instruction",
     "206": "data_packet['meta_data']['auth_token'] is missing",
     "207": "data_packet['meta_data']['sender'] is missing",
-    "208": "data_packet['data'] does not exist"
+    "208": "data_packet['data'] does not exist",
+
+    "300": "Error processing instruction",
+    "301": "Error getting data"
 }
