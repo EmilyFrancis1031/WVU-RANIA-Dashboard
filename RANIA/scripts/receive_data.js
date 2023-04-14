@@ -3,12 +3,16 @@
 //A status code and message is returned to sender
 
 //include message_list.json // box 10
-import message_list from '../files/message_list.json'
-import verify_format from './verify_format'
-import authenticate_data from './authenticate_data'
+var message_list = require('../files/message_list.json')
+var verify_format = require('./verify_format')
+var authenticate_data = require('./authenticate_data')
+const dotenv = require('dotenv').config()
+
+
 //import * from './data_scripts'
 
-export function receive_data(data_packet) {
+function receive_data(data_packet, instruction) {
+  console.log(data_packet)
 
   var errorcode = 0;
   
@@ -28,8 +32,8 @@ export function receive_data(data_packet) {
     if(auth == 101){
       //if validated and authenticated, call instruction in data_packet
       //see boxes 20-29
-      //data_packet['instruction'](data_packet)
-      data_packet['instruction'](data_packet)
+      //call instruction passed in by data route
+      instruction(data_packet)
     }
     else{
       //      set errorcode
@@ -43,3 +47,5 @@ export function receive_data(data_packet) {
   //send status code and message to requestor*/
   return message_list[errorcode]
 }
+
+module.exports = receive_data

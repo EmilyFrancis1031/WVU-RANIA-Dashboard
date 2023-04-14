@@ -1,6 +1,6 @@
 //calls tiny_db update
-import TinyDB from "tinydb"
-export function insert_data(data_packet) {
+var TinyDB = require('tinydb');
+function update_data(data_packet) {
     
     var errorcode = 301
 
@@ -25,3 +25,5 @@ export function insert_data(data_packet) {
     return errorcode  //return to 01
 
 }
+
+module.exports = update_data

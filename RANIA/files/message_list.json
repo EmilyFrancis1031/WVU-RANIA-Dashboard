@@ -5,16 +5,15 @@
 
     "100": "Error in authentication",
     "101": "Authentication Successful",
+    "102": "Error accessing Access Control List",
+    "103": "Access Refused",
 
     "200": "Error in validating data_packet structure",
     "201": "Validation Successful",
     "202": "data_packet['meta_data'] is missing or is incorrect format",
-    "203": "data_packet['meta_data'] has no key/value 'instruction pair",
-    "204": "data_packet['meta_data']['instruction'] is missing or is in incorrect format",
-    "205": "data_packet['meta_data']['instruction'] is not a valid instruction",
-    "206": "data_packet['meta_data']['auth_token'] is missing",
-    "207": "data_packet['meta_data']['sender'] is missing",
-    "208": "data_packet['data'] does not exist",
+    "203": "data_packet['meta_data']['auth_token'] is missing",
+    "204": "data_packet['meta_data']['sender'] is missing",
+    "205": "data_packet['data'] is missing",
 
     "300": "Error processing instruction",
     "301": "Error getting data"

@@ -2,8 +2,10 @@
 //Update for proper auth methods
 
 //Insert data_packet['auth_token'] to access_control.json
-import TinyDB from "tinydb"
-export function connect_device(data_packet) {
+var TinyDB = require('tinydb');
+const dotenv = require('dotenv').config()
+
+function connect_device(data_packet) {
     
     var errorcode = 100
 
@@ -35,3 +37,5 @@ export function connect_device(data_packet) {
     return errorcode  //return to 01
 
 }
+
+module.exports = connect_device

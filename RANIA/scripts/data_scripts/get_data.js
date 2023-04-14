@@ -1,6 +1,7 @@
 //calls tiny_db get
-import TinyDB from "tinydb"
-export function get_data(data_packet) {
+var TinyDB = require('tinydb');
+const dotenv = require('dotenv').config()
+function get_data(data_packet) {
     
     var errorcode = 301
 
@@ -29,3 +30,4 @@ export function get_data(data_packet) {
     return errorcode  //return to 01
 
 }
+module.exports = get_data

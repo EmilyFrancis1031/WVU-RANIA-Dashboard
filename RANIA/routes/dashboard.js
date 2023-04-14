@@ -10,8 +10,4 @@ router.get('/', function (req, res, next) {
   res.render(dbp, { title: 'RANIA - Dashboard' });
 });
 
-test_db.onReady = function() {
-  console.log('database is ready for operating');
-}
-
 module.exports = router;

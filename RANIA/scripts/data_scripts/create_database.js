@@ -1,8 +1,10 @@
 //This function adds the directory for the device in the rania database
 //see npm FS package
-import TinyDB from "tinydb"
-import FS from "fs"
-export function create_database(data_packet) {
+var TinyDB = require('tinydb');
+var FS = require("fs");
+const dotenv = require('dotenv').config()
+
+function create_database(data_packet) {
     
     var errorcode = 100
 
@@ -24,3 +26,5 @@ export function create_database(data_packet) {
     return errorcode  //return to 01
 
 }
+
+module.exports = create_database

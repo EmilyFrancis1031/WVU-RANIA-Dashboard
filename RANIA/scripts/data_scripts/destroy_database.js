@@ -1,6 +1,8 @@
 //remove tiny_db json file from directory
 var fs = require("fs")
-export function destroy_database(data_packet) {
+const dotenv = require('dotenv').config()
+
+function destroy_database(data_packet) {
     const to_remove = data_packet["data"]["to_remove"]
     db_path = "./rania_db/device_data/"+to_remove
     try {
@@ -12,3 +14,5 @@ export function destroy_database(data_packet) {
       }
     
 }
+
+module.exports = destroy_database
