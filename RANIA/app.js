@@ -38,6 +38,8 @@ app.use("/agenda", agendaRouter);
 app.use("/settings", settingsRouter);
 app.use("/data", receiveData)
 
+app.use("/public/stylesheets", express.static(path.join(__dirname,'public','stylesheets')));
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
