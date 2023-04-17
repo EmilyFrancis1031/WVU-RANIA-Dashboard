@@ -2,15 +2,14 @@
 //Called by 01: receive_data
 //update this function as you see fit
 //THIS NEEDS TO CHANGE FOR CONNECTING THE DEVICE
-var TinyDB = require("tinydb")
-const dotenv = require('dotenv').config()
-const acl_path = dotenv.DB_ACL
-function authenticate_data(data_packet) {
-    
-    var errorcode = 100
-    console.log(process.env.DB_ACL)
+var TinyDB = require("tinydb");
+const dotenv = require("dotenv").config();
+const acl_path = dotenv.DB_ACL;
+async function authenticate_data(data_packet) {
+  var errorcode = 100;
+  //console.log(process.env.DB_ACL)
 
-    acl = new TinyDB(acl_path)
+  /*acl = new TinyDB(acl_path)
     //query ACL
 
     acl.onReady = function(){
@@ -31,12 +30,10 @@ function authenticate_data(data_packet) {
                 
             
           });
-    }
-    
+    }*/
 
-    
-    return errorcode  //return to 01
-
+  errorcode = 101;
+  return errorcode; //return to 01
 }
 
-module.exports = authenticate_data
+module.exports = authenticate_data;

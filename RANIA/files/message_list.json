@@ -16,5 +16,10 @@
     "205": "data_packet['data'] is missing",
 
     "300": "Error processing instruction",
-    "301": "Error getting data"
+
+    "310": "Error getting data",
+
+    "320": "Error updating data",
+
+    "330": "Error insertin data"
 }
