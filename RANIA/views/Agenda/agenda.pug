@@ -28,6 +28,9 @@ head
             .card.mb-4
               .card-header Add Event
               .card-body
+             
+              
+              
                 form#addEventForm(action="/agenda/add" method="POST")
                   .form-group
                     label(for='eventTitle') Event Title
@@ -39,6 +42,9 @@ head
                     label(for='eventTime') Event Time
                     input#eventTime.form-control(type='time' name='eventTime' placeholder='Enter event time')
                   button.btn.btn-primary(type='submit') Add Event
+                
+                   
+                   
                   
           .col-lg-6.col-md-12
             .card.mb-4
