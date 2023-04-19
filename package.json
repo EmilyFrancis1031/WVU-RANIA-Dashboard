@@ -4,19 +4,15 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "devstart": "SET DEBUG=myapp:* & nodemon ./bin/www"
+    "devstart": "DEBUG=myapp:* nodemon ./bin/www"
   },
   "dependencies": {
-    "bootstrap": "^5.2.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
-    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "popup": "^0.0.3",
-    "pug": "^3.0.2",
-    "tinydb": "^0.1.0"
+    "pug": "^3.0.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"

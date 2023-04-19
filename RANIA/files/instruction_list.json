@@ -1,0 +1,10 @@
+{
+    "0": "connect_device",
+    "1": "disconnect_device",
+    "2": "create_database",
+    "3": "destroy_database",
+    "4": "insert_data",
+    "5": "remove_data",
+    "6": "get_data",
+    "7": "update_data"
+}

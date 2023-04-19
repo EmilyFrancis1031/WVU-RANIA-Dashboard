@@ -1,0 +1,25 @@
+{
+    "0": "Success",
+
+    "1": "Undefined error",
+
+    "100": "Error in authentication",
+    "101": "Authentication Successful",
+    "102": "Error accessing Access Control List",
+    "103": "Access Refused",
+
+    "200": "Error in validating data_packet structure",
+    "201": "Validation Successful",
+    "202": "data_packet['meta_data'] is missing or is incorrect format",
+    "203": "data_packet['meta_data']['auth_token'] is missing",
+    "204": "data_packet['meta_data']['sender'] is missing",
+    "205": "data_packet['data'] is missing",
+
+    "300": "Error processing instruction",
+
+    "310": "Error getting data",
+
+    "320": "Error updating data",
+
+    "330": "Error insertin data"
+}
