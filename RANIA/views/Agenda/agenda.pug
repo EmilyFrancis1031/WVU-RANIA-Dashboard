@@ -13,7 +13,16 @@ head
       .sb-sidenav-menu
         .nav
           button.dbutton(type='button' onclick="window.location.href='/dashboard'") Rania Home
-
+          //- Here we need a script that uses fetch api to call to /data/insert-data
+          //- payload = {"meta_data": {
+          //-     "auth_token": "01",
+          //-     "sender": "localhost"},
+          //-     "data": {
+          //-     "device_name": "agenda",
+          //-     "db_name": "agenda",
+          //-     "k": "Doctor Appointment",
+          //- }
+          //- }
           a.nav-link(href='#') View Calendar
           a.nav-link(href='#') Add Event
           a.nav-link(href='#') Remove Event

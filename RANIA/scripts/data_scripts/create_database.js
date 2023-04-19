@@ -24,9 +24,9 @@ async function create_database(data_packet) {
       db.setInfo("_default", {}, function (err, key, value) {
         if (err) {
           console.error(err);
-          errorcode = 310;
+          errorcode = 340;
         }
-        errorcode = 311;
+        errorcode = 341;
       });
       resolve(errorcode);
     };

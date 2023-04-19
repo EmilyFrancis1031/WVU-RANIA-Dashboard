@@ -8,7 +8,7 @@ async function remove_data(data_packet) {
     data_packet["data"]["device_name"] +
     "/" +
     data_packet["data"]["db_name"] +
-    "_data.json";
+    ".json";
 
   db = new TinyDB(db_path);
 

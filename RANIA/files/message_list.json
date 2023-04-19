@@ -21,5 +21,8 @@
 
     "320": "Error updating data",
 
-    "330": "Error inserting data"
+    "330": "Error inserting data",
+
+    "340": "Error creating Database",
+    "341": "Database Created Successfully"
 }

@@ -10,7 +10,7 @@ async function update_data(data_packet) {
     data_packet["data"]["db"] +
     "/" +
     data_packet["data"]["db"] +
-    "_data.json";
+    ".json";
 
   db = new TinyDB(db_path);
   //query ACL
