@@ -76,16 +76,17 @@ html(lang="en")
               .col-auto
                 .card.deviceListCard
                   .card-body Device List
-                  .card-text
-                    ul.device-list
-                      li
-                        button.db-button Device 1
-                      li
-                        button.db-button Device 2
-                      li
-                        button.db-button Device 3
-                      li
-                        button.db-button Device 4
+                    .card-text
+                      ul.device-list
+                        if devices && devices.length
+                          each device in devices
+                            li
+                              if device
+                                .db-button(href=`/device/${device.id}`) #{device.name}
+                              else
+                                li(colspan="2") No device found.
+                        else
+                          li(colspan="2") No devices found.
                   .card-footer.d-flex.align-items-center.justify-content-between
                 .card.notificationsCard
                   .card-body Notifications
@@ -95,7 +96,6 @@ html(lang="en")
               .col-auto
                 .card.agendaCard.align-items-center
                   button.dbutton(type='button' onclick="window.location.href='/agenda'") Go to Agenda
-
                   .card-footer.d-flex.align-items-center.justify-content-between
                 .card.timeCard
                   p(id="today_date") Today's Date
@@ -107,7 +107,7 @@ html(lang="en")
                       day = date.getDate();
                       document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
                 .card.logoutCard.align-items-center
-                  button.db-button Logout
+                  button.dbutton(type='button' onclick="window.location.href='/'") logout
                   .card-footer.d-flex.align-items-center.justify-content-between
   script(
     crossorigin="anonymous" 
