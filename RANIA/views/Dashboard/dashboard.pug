@@ -1,4 +1,4 @@
-doctype html
+
 html(lang="en")
   head
     meta(charset="utf-8")
@@ -61,25 +61,17 @@ html(lang="en")
             .row
               .col-auto
                 .card.scheduleCard
-                  .card-body Schedule
                   .card-text
                     table.schedule-table
                       tbody
-                        tr
-                          td 12:00
-                          td Do Something
-                        tr
-                          td 12:30
-                          td Do Something
-                        tr
-                          td 3:00
-                          td Do Something
-                        tr
-                          td 4:30
-                          td Do Something
-                        tr
-                          td 8:00
-                          td Do Something
+                        if events && events.length
+                          each event in events
+                            tr
+                              td #{event.time}
+                              td #{event.title}
+                        else
+                          tr
+                            td(colspan="2") No events found.
                   .card-footer.d-flex.align-items-center.justify-content-between
               .col-auto
                 .card.deviceListCard
@@ -126,4 +118,11 @@ html(lang="en")
     integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" 
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
     )
-  //- script(src="script.js")
+  // script(src="script.js")
+script.
+    app.get('/agenda', function(req, res) {
+      // Query database for calendar events
+      const events = db.get('calendar_events').value();
+      // Render the agenda view with the retrieved events
+      res.render('agenda', { events });
+    });
