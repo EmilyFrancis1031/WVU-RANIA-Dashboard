@@ -6,9 +6,9 @@ async function get_data(data_packet) {
 
   db_path =
     process.env.DB_DEVICE_ROOT_PATH +
-    data_packet["data"]["get"] +
+    data_packet["data"]["device_name"] +
     "/" +
-    data_packet["data"]["get"] +
+    data_packet["data"]["db_name"] +
     "_data.json";
 
   db = new TinyDB(db_path);
@@ -20,7 +20,6 @@ async function get_data(data_packet) {
         if (err) {
           console.error(err);
           errorcode = 310;
-          reject(err);
         }
 
         result = { data: value };
