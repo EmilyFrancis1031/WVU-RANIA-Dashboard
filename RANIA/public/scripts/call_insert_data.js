@@ -1,5 +1,6 @@
-async function insertData(url = "", data = {}) {
-    const response = await fetch(url, {
+async function insertData(url = "", data) {
+  console.log(url, data);
+  /*const response = await fetch(url, {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
@@ -11,5 +12,5 @@ async function insertData(url = "", data = {}) {
       referrerPolicy: "no-referrer",
       body: JSON.stringify(data),
     });
-    return response.json();
+    return response.json();*/
 }
