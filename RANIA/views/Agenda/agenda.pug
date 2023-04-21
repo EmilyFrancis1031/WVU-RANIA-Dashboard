@@ -47,7 +47,7 @@ head
                   .form-group
                     label(for='eventTime') Event Time
                     input#eventTime.form-control(type='time' name='eventTime' placeholder='Enter event time')
-                  button.btn.btn-primary(type='button' onclick="insertData('/data/insert-data', '{title: test, date: test, time: test}')") Add Event
+                  button.btn.btn-primary(type='button' onclick="insertData('/data/insert-data')") Add Event
                   script(src='/public/scripts/call_insert_data.js')
           .col-lg-6.col-md-12
             .card.mb-4
