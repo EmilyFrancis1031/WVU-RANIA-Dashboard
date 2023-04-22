@@ -6,21 +6,20 @@ async function get_data(data_packet) {
 
   db_path =
     process.env.DB_DEVICE_ROOT_PATH +
-    data_packet["data"]["get"] +
+    data_packet["data"]["device_name"] +
     "/" +
-    data_packet["data"]["get"] +
-    "_data.json";
+    data_packet["data"]["db_name"] +
+    ".json";
 
   db = new TinyDB(db_path);
 
   const dbResult = await new Promise((resolve) => {
     let result = undefined;
     db.onReady = function () {
-      db.getInfo("_default", function (err, key, value) {
+      db.getInfo(data_packet["data"]["key"], function (err, key, value) {
         if (err) {
           console.error(err);
           errorcode = 310;
-          reject(err);
         }
 
         result = { data: value };

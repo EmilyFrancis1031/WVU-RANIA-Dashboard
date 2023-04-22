@@ -47,7 +47,7 @@ async function receive_data(data_packet, instruction) {
   }
   //send status code and message to requestor*/
   var returnItem = null;
-  if (result == null) {
+  if (result == null || Number.isInteger(result) ) {
     returnItem = message_list[errorcode];
   } else {
     returnItem = result;

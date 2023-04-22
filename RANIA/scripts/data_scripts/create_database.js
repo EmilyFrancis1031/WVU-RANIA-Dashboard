@@ -7,21 +7,32 @@ const dotenv = require("dotenv").config();
 async function create_database(data_packet) {
   var errorcode = 100;
 
-  new_db = new TinyDB("./test.db");
+  db_path =
+    process.env.DB_DEVICE_ROOT_PATH +
+    data_packet["data"]["device_name"] +
+    "/" +
+    data_packet["data"]["db_name"] +
+    ".json";
+
+  console.log(db_path);
+
+  db = new TinyDB(db_path);
   //query ACL
 
-  new_db.onReady = function () {
-    //if error creating database
-    if (err) {
-      errorcode = 100;
-    } else {
-      //set errorcode
-      errorcode = 102;
-      //end
-    }
-  };
+  const dbResult = await new Promise((resolve) => {
+    db.onReady = function (err) {
+      db.setInfo("_default", {}, function (err, key, value) {
+        if (err) {
+          console.error(err);
+          errorcode = 340;
+        }
+        errorcode = 341;
+      });
+      resolve(errorcode);
+    };
+  });
 
-  return errorcode; //return to 01
+  return dbResult; //return to 01
 }
 
 module.exports = create_database;

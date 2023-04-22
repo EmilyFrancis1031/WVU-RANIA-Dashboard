@@ -28,19 +28,19 @@ router.get("/connect-device", async function (req, res, next) {
 });
 
 /* Create Database */
-router.get("/create-database", async function (req, res, next) {
+router.post("/create-database", async function (req, res, next) {
   var result = await receive_data(req.body, create_database);
   res.send(result);
 });
 
 /* Destroy Database */
-router.get("/destroy-database", async function (req, res, next) {
+router.post("/destroy-database", async function (req, res, next) {
   var result = await receive_data(req.body, destroy_database);
   res.send(result);
 });
 
 /* Disconnect Device */
-router.get("/disconnect-device", async function (req, res, next) {
+router.post("/disconnect-device", async function (req, res, next) {
   var result = await receive_data(req.body, disconnect_device);
   res.send(result);
 });
@@ -54,19 +54,19 @@ router.get("/get-data", async function (req, res, next) {
 });
 
 /* Insert Data */
-router.get("/insert-data", async function (req, res, next) {
+router.post("/insert-data", async function (req, res, next) {
   var result = await receive_data(req.body, insert_data);
   res.send(result);
 });
 
 /* Remove Data */
-router.get("/remove-data", async function (req, res, next) {
+router.post("/remove-data", async function (req, res, next) {
   var result = await receive_data(req.body, remove_data);
   res.send(result);
 });
 
 /* Update Data */
-router.get("/update-data", async function (req, res, next) {
+router.post("/update-data", async function (req, res, next) {
   var result = await receive_data(req.body, update_data);
   res.send(result);
 });
