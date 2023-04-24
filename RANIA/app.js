@@ -14,6 +14,11 @@ var dashboardRouter = require("./routes/dashboard");
 var agendaRouter = require("./routes/agenda");
 var settingsRouter = require("./routes/settings");
 var receiveData = require("./routes/receive_data");
+var personalRouter = require("./routes/editpersonal");
+var medicalRouter = require("./routes/editmedical");
+var medicationRouter = require("./routes/editmedication");
+var contactRouter = require("./routes/editcontact");
+var deviceRouter = require("./routes/devices");
 
 var app = express();
 
@@ -37,6 +42,11 @@ app.use("/dashboard", dashboardRouter);
 app.use("/agenda", agendaRouter);
 app.use("/settings", settingsRouter);
 app.use("/data", receiveData);
+app.use("/contacts", contactRouter);
+app.use("/medical", medicalRouter);
+app.use("/devices", deviceRouter);
+app.use("/medications", medicationRouter);
+app.use("/personal", personalRouter);
 
 app.use(
   "/public/stylesheets",

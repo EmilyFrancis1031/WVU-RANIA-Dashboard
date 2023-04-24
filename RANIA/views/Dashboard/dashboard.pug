@@ -43,12 +43,11 @@ html(lang="en")
         nav#sidenavAccordion.sb-sidenav.accordion.sb-sidenav-dark
           .sb-sidenav-menu
             .nav
-              a.nav-title(href="index.html") RANIA Home
-              .sb-sidenav-menu-heading Settings
-              a.nav-link(href="../Settings/settings.pug") Manage Devices
-              a.nav-link(href="/settings") Edit Resident Info
-              a.nav-link(href="index.html") Edit Contact Info
-              a.nav-link(href="index.html") Send data to...
+              a.nav-title(href="/dashboard") RANIA
+              .sb-sidenav-menu-heading Page Actions
+              a.nav-link(href="/devices") Manage Devices
+              a.nav-link(href="/settings") User Info
+              a.nav-link(href="/agenda") Manage Your Agenda
           .sb-sidenav-footer
             .small Logged in as:
             | UserName
@@ -92,9 +91,7 @@ html(lang="en")
                     p Notifications
                   .card-footer.d-flex.align-items-center.justify-content-between
               .col-auto
-                .card.agendaCard.align-items-center
-                  button.db-button(type='button' onclick="window.location.href='/agenda'") Edit Agenda
-                  .card-footer.d-flex.align-items-center.justify-content-between
+               
                 .card.timeCard
                   p(id="today_date") Today's Date
                   p(id="current_date")
@@ -104,9 +101,7 @@ html(lang="en")
                       month = date.getMonth() + 1;
                       day = date.getDate();
                       document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
-                .card.logoutCard.align-items-center
-                  button.db-button(type='button' onclick="window.location.href='/'") logout
-                  .card-footer.d-flex.align-items-center.justify-content-between
+                
   script(
     crossorigin="anonymous" 
     integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" 
@@ -118,10 +113,3 @@ html(lang="en")
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
     )
   // script(src="script.js")
-script.
-    app.get('/agenda', function(req, res) {
-      // Query database for calendar events
-      const events = db.get('calendar_events').value();
-      // Render the agenda view with the retrieved events
-      res.render('agenda', { events });
-    });
