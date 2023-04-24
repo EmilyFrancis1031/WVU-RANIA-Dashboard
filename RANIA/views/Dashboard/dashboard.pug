@@ -23,6 +23,26 @@ html(lang="en")
       href="../../public/stylesheets/dashboard.css" 
       rel="stylesheet"
       )
+    
+    script. 
+      function getApiData(){
+        fetch('/data/get-data',{
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({meta_data:{
+                    auth_token: "01",
+                    sender: "Agenda",
+                  },
+                 data:{
+                  device_name: 'agenda',
+                  db_name: 'agenda',
+                  k: 'Doctor\'s Appointment'
+                 }})
+      })
+          .then(response => response.json())
+          .then(data=> console.log(data))
+      }
+      window.onload = getApiData
   body.sb-nav-fixed
     #layoutSidenav
       .mobile-menu
@@ -60,7 +80,8 @@ html(lang="en")
               .col-auto
                 .card.scheduleCard
                   .card-text
-                    table.schedule-table
+                    table.schedule-table(id="schedule-table")
+
                       tbody
                         if events && events.length
                           each event in events
@@ -118,10 +139,3 @@ html(lang="en")
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
     )
   // script(src="script.js")
-script.
-    app.get('/agenda', function(req, res) {
-      // Query database for calendar events
-      const events = db.get('calendar_events').value();
-      // Render the agenda view with the retrieved events
-      res.render('agenda', { events });
-    });

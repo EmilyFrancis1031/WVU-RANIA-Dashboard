@@ -46,7 +46,7 @@ router.post("/disconnect-device", async function (req, res, next) {
 });
 
 /* Get Data */
-router.get("/get-data", async function (req, res, next) {
+router.post("/get-data", async function (req, res, next) {
   //console.log(req.body)
   var result = await receive_data(req.body, get_data);
   console.log("[route result]: ", result);
