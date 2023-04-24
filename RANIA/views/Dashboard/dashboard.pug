@@ -23,6 +23,26 @@ html(lang="en")
       href="../../public/stylesheets/dashboard.css" 
       rel="stylesheet"
       )
+    
+    script. 
+      function getApiData(){
+        fetch('/data/get-data',{
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({meta_data:{
+                    auth_token: "01",
+                    sender: "Agenda",
+                  },
+                 data:{
+                  device_name: 'agenda',
+                  db_name: 'agenda',
+                  k: 'Doctor\'s Appointment'
+                 }})
+      })
+          .then(response => response.json())
+          .then(data=> console.log(data))
+      }
+      window.onload = getApiData
   body.sb-nav-fixed
     #layoutSidenav
       .mobile-menu
@@ -59,7 +79,8 @@ html(lang="en")
               .col-auto
                 .card.scheduleCard
                   .card-text
-                    table.schedule-table
+                    table.schedule-table(id="schedule-table")
+
                       tbody
                         if events && events.length
                           each event in events
@@ -102,6 +123,7 @@ html(lang="en")
                       day = date.getDate();
                       document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
                 
+  script(
   script(
     crossorigin="anonymous" 
     integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" 

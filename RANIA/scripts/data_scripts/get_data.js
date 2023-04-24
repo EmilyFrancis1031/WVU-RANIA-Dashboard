@@ -4,6 +4,8 @@ var TinyDB = require("tinydb");
 async function get_data(data_packet) {
   var errorcode = 310;
 
+  console.log("Key is: "+data_packet["data"]["k"])
+
   db_path =
     process.env.DB_DEVICE_ROOT_PATH +
     data_packet["data"]["device_name"] +
@@ -16,7 +18,7 @@ async function get_data(data_packet) {
   const dbResult = await new Promise((resolve) => {
     let result = undefined;
     db.onReady = function () {
-      db.getInfo(data_packet["data"]["key"], function (err, key, value) {
+      db.getInfo(data_packet["data"]["k"], function (err, key, value) {
         if (err) {
           console.error(err);
           errorcode = 310;
