@@ -4,13 +4,9 @@ var TinyDB = require("tinydb");
 async function get_data(data_packet) {
   var errorcode = 310;
 
-<<<<<<< Updated upstream
-  db_path =
-=======
   console.log("Key is: " + data_packet["data"]["k"]);
 
   path =
->>>>>>> Stashed changes
     process.env.DB_DEVICE_ROOT_PATH +
     data_packet["data"]["device_name"] +
     "/" +

@@ -1,4 +1,3 @@
-
 html(lang="en")
   head
     meta(charset="utf-8")
@@ -23,8 +22,6 @@ html(lang="en")
       href="../../public/stylesheets/dashboard.css" 
       rel="stylesheet"
       )
-<<<<<<< Updated upstream
-=======
 
     script.
       function generateTable(jsonData){
@@ -112,6 +109,7 @@ html(lang="en")
           const button = document.createElement('button');
           button.textContent = data[key]['alias'];
           button.onclick = function() {
+            document.getElementById("data-area").innerHTML = ""
             getAvailableData(key);
             const label = document.getElementById('device-label')
             label.innerHTML = data[key].alias
@@ -157,11 +155,9 @@ html(lang="en")
         getDevices();
         
       }
-  script.
       window.onload = function(){
         loadDashboard();
       }
->>>>>>> Stashed changes
   body.sb-nav-fixed
     #layoutSidenav
       .mobile-menu
@@ -199,46 +195,6 @@ html(lang="en")
             h1.mt-4 Dashboard
             .row
               .col-auto
-<<<<<<< Updated upstream
-                .card.scheduleCard
-                  .card-text
-                    table.schedule-table
-                      tbody
-                        if events && events.length
-                          each event in events
-                            tr
-                              td #{event.time}
-                              td #{event.title}
-                        else
-                          tr
-                            td(colspan="2") No events found.
-                  .card-footer.d-flex.align-items-center.justify-content-between
-              .col-auto
-                .card.deviceListCard
-                  .card-body Device List
-                    .card-text
-                      ul.device-list
-                        if devices && devices.length
-                          each device in devices
-                            li
-                              if device
-                                .db-button(href=`/device/${device.id}`) #{device.name}
-                              else
-                                li(colspan="2") No device found.
-                        else
-                          li(colspan="2") No devices found.
-                  .card-footer.d-flex.align-items-center.justify-content-between
-                .card.notificationsCard
-                  .card-body Notifications
-                  .card-text
-                    p Notifications
-                  .card-footer.d-flex.align-items-center.justify-content-between
-              .col-auto
-                .card.agendaCard.align-items-center
-                  button.dbutton(type='button' onclick="window.location.href='/agenda'") Go to Agenda
-                  .card-footer.d-flex.align-items-center.justify-content-between
-=======
->>>>>>> Stashed changes
                 .card.timeCard
                   p(id="today_date") Today's Date
                   p(id="current_date")
@@ -248,11 +204,6 @@ html(lang="en")
                       month = date.getMonth() + 1;
                       day = date.getDate();
                       document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
-<<<<<<< Updated upstream
-                .card.logoutCard.align-items-center
-                  button.dbutton(type='button' onclick="window.location.href='/'") logout
-                  .card-footer.d-flex.align-items-center.justify-content-between
-=======
                 .card.notificationsCard
                   .card-body Notifications
                   .card-text
@@ -273,7 +224,6 @@ html(lang="en")
                   .card-footer.d-flex.align-items-center.justify-content-between
                
                 
->>>>>>> Stashed changes
   script(
     crossorigin="anonymous" 
     integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" 
@@ -283,16 +233,4 @@ html(lang="en")
     crossorigin="anonymous" 
     integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" 
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-<<<<<<< Updated upstream
     )
-  // script(src="script.js")
-script.
-    app.get('/agenda', function(req, res) {
-      // Query database for calendar events
-      const events = db.get('calendar_events').value();
-      // Render the agenda view with the retrieved events
-      res.render('agenda', { events });
-    });
-=======
-    )
->>>>>>> Stashed changes

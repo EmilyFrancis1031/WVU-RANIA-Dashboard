@@ -45,7 +45,7 @@ router.post("/disconnect-device", async function (req, res, next) {
 });
 
 /* Get Data */
-router.get("/get-data", async function (req, res, next) {
+router.post("/get-data", async function (req, res, next) {
   //console.log(req.body)
   var result = await receive_data(req.body, get_data);
   console.log("[route result]: ", result);
@@ -53,17 +53,11 @@ router.get("/get-data", async function (req, res, next) {
 });
 
 /* Insert Data */
-<<<<<<< Updated upstream
-router.post("/insert-data", async function (req, res, next) {
-  var result = await receive_data(req.body, insert_data);
-  res.send(result);
-=======
 router.post("/upsert-data", async function (req, res, next) {
   console.log(req.body);
   var result = await receive_data(req.body, upsert_data);
   console.log(result);
   res.json(result);
->>>>>>> Stashed changes
 });
 
 /* Remove Data */
@@ -72,13 +66,4 @@ router.post("/remove-data", async function (req, res, next) {
   res.send(result);
 });
 
-<<<<<<< Updated upstream
-/* Update Data */
-router.post("/update-data", async function (req, res, next) {
-  var result = await receive_data(req.body, update_data);
-  res.send(result);
-});
-
-=======
->>>>>>> Stashed changes
 module.exports = router;
