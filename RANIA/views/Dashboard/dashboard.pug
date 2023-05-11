@@ -150,14 +150,14 @@ html(lang="en")
           .then(response => response.json())
           .then(data=> populateDevices(data['devices']))
       }
-  script.
-      function loadDashboard(){
-        getDevices();
-        
-      }
-      window.onload = function(){
-        loadDashboard();
-      }
+    script.
+        function loadDashboard(){
+          getDevices();
+          
+        }
+        window.onload = function(){
+          loadDashboard();
+        }
   body.sb-nav-fixed
     #layoutSidenav
       .mobile-menu
@@ -171,21 +171,18 @@ html(lang="en")
           li
             a.nav-link(href="index.html") Manage Devices
           li
-            a.nav-link(href="index.html") Edit Resident Info
-          li
-            a.nav-link(href="index.html") Edit Contact Info
+            a.nav-link(href="/settings") Edit Resident Info
           li
             a.nav-link(href="index.html") Send data to...
       div(id="layoutSidenav_nav")
         nav#sidenavAccordion.sb-sidenav.accordion.sb-sidenav-dark
           .sb-sidenav-menu
             .nav
-              a.nav-title(href="index.html") RANIA Home
-              .sb-sidenav-menu-heading Settings
-              a.nav-link(href="../Settings/settings.pug") Manage Devices
-              a.nav-link(href="index.html") Edit Resident Info
-              a.nav-link(href="index.html") Edit Contact Info
-              a.nav-link(href="index.html") Send data to...
+              a.nav-title(href="/dashboard") RANIA
+              .sb-sidenav-menu-heading Page Actions
+              a.nav-link(href="/devices") Manage Devices
+              a.nav-link(href="/settings") User Info
+              a.nav-link(href="/agenda") Manage Your Agenda
           .sb-sidenav-footer
             .small Logged in as:
             | UserName

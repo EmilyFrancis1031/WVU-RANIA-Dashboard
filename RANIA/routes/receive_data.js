@@ -17,31 +17,31 @@ var remove_data = require("../scripts/data_scripts/remove_data");
 
 /* Process Data. */
 router.get("/", async function (req, res, next) {
-  res.send("Data Help");
+  res.json("Data Help");
 });
 
 /* Connect Device */
 router.post("/connect-device", async function (req, res, next) {
   var result = await receive_data(req.body, connect_device);
-  res.send(result);
+  res.json(result);
 });
 
 /* Create Database */
 router.post("/create-database", async function (req, res, next) {
   var result = await receive_data(req.body, create_database);
-  res.send(result);
+  res.json(result);
 });
 
 /* Destroy Database */
 router.post("/destroy-database", async function (req, res, next) {
   var result = await receive_data(req.body, destroy_database);
-  res.send(result);
+  res.json(result);
 });
 
 /* Disconnect Device */
 router.post("/disconnect-device", async function (req, res, next) {
   var result = await receive_data(req.body, disconnect_device);
-  res.send(result);
+  res.json(result);
 });
 
 /* Get Data */
@@ -49,7 +49,7 @@ router.post("/get-data", async function (req, res, next) {
   //console.log(req.body)
   var result = await receive_data(req.body, get_data);
   console.log("[route result]: ", result);
-  res.send(result);
+  res.json(result);
 });
 
 /* Insert Data */
@@ -63,7 +63,8 @@ router.post("/upsert-data", async function (req, res, next) {
 /* Remove Data */
 router.post("/remove-data", async function (req, res, next) {
   var result = await receive_data(req.body, remove_data);
-  res.send(result);
+  console.log(result);
+  res.json(result);
 });
 
 module.exports = router;
