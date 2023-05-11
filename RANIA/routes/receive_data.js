@@ -12,9 +12,8 @@ var create_database = require("../scripts/data_scripts/create_database");
 var destroy_database = require("../scripts/data_scripts/destroy_database");
 var disconnect_device = require("../scripts/data_scripts/disconnect_device");
 var get_data = require("../scripts/data_scripts/get_data");
-var insert_data = require("../scripts/data_scripts/insert_data");
+var upsert_data = require("../scripts/data_scripts/upsert_data");
 var remove_data = require("../scripts/data_scripts/remove_data");
-var update_data = require("../scripts/data_scripts/update_data");
 
 /* Process Data. */
 router.get("/", async function (req, res, next) {
@@ -22,7 +21,7 @@ router.get("/", async function (req, res, next) {
 });
 
 /* Connect Device */
-router.get("/connect-device", async function (req, res, next) {
+router.post("/connect-device", async function (req, res, next) {
   var result = await receive_data(req.body, connect_device);
   res.send(result);
 });
@@ -54,9 +53,17 @@ router.get("/get-data", async function (req, res, next) {
 });
 
 /* Insert Data */
+<<<<<<< Updated upstream
 router.post("/insert-data", async function (req, res, next) {
   var result = await receive_data(req.body, insert_data);
   res.send(result);
+=======
+router.post("/upsert-data", async function (req, res, next) {
+  console.log(req.body);
+  var result = await receive_data(req.body, upsert_data);
+  console.log(result);
+  res.json(result);
+>>>>>>> Stashed changes
 });
 
 /* Remove Data */
@@ -65,10 +72,13 @@ router.post("/remove-data", async function (req, res, next) {
   res.send(result);
 });
 
+<<<<<<< Updated upstream
 /* Update Data */
 router.post("/update-data", async function (req, res, next) {
   var result = await receive_data(req.body, update_data);
   res.send(result);
 });
 
+=======
+>>>>>>> Stashed changes
 module.exports = router;

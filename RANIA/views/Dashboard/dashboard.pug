@@ -23,6 +23,145 @@ html(lang="en")
       href="../../public/stylesheets/dashboard.css" 
       rel="stylesheet"
       )
+<<<<<<< Updated upstream
+=======
+
+    script.
+      function generateTable(jsonData){
+        const table = document.createElement('table');
+        //table.setAttribute('id', tableId);
+        const keys = Object.keys(jsonData);
+
+        // Create table data rows
+        
+        for (let i = 0; i < keys.length; i++) {
+          const dataRow = table.insertRow(-1);
+          //const dataCell = document.createElement('td');
+          const rowData = jsonData[keys[i]]
+          console.log("[RowData]: ",rowData)
+          const rowDataKeys = Object.keys(rowData)
+          for(let j = 0; j < rowDataKeys.length; j++){
+              const dataCell = document.createElement('td');
+              dataCell.textContent = jsonData[keys[i]][rowDataKeys[j]];
+              dataRow.appendChild(dataCell);
+          }
+          //dataCell.textContent = `${jsonData[keys[i]].name} (${jsonData[keys[i]].time})`;
+          //dataRow.appendChild(dataCell);
+        }
+
+        return table.outerHTML;
+      }
+    
+    script.
+      function getDatabaseData(device, db, data){
+        const style = data.style
+        
+        fetch('/data/get-data',{
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({meta_data:{
+                    auth_token: "01",
+                    sender: "Localhost",
+                  },
+                 data:{
+                  device_name: device,
+                  db_name: db,
+                 }})
+      })
+          .then(response => response.json())
+          .then(data=> {
+            var result = undefined
+            if(style == "table"){
+              result = generateTable(data)
+              document.getElementById("data-area").innerHTML = result
+            }
+            else{
+              console.log("Unhandled data style")
+              document.getElementById("data-area").innerHTML = "Unhandled data style"
+            }
+            
+          })
+        
+      }
+      function getAvailableData(key){
+          fetch('/data/get-data',{
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({meta_data:{
+                    auth_token: "01",
+                    sender: "Localhost",
+                  },
+                 data:{
+                  device_name: key,
+                  db_name: 'meta_data',
+                 }})
+      })
+          .then(response => response.json())
+          .then(data=> populateData(key, data))
+      }
+          
+    script.
+      function populateDevices(data){
+         
+        const table = document.getElementById('devices-table');
+        console.log("[populateDevices]: "+ JSON.stringify(data));
+        const row = table.insertRow(-1);
+        for (const key in data) {
+          
+          const deviceCell = row.insertCell(0);
+          const button = document.createElement('button');
+          button.textContent = data[key]['alias'];
+          button.onclick = function() {
+            getAvailableData(key);
+            const label = document.getElementById('device-label')
+            label.innerHTML = data[key].alias
+          };
+          deviceCell.appendChild(button);
+        };
+      }
+
+      function populateData(device, data){
+        console.log("[populateData: ]"+JSON.stringify(data))
+        const row = document.getElementById('available-data-table');
+        row.innerHTML = ""
+        for (const key in data) {
+          const deviceCell = row.insertCell(0);
+          const button = document.createElement('button');
+          button.textContent = key;
+          button.onclick = function() {
+            
+            getDatabaseData(device, key, data[key])
+          };
+          deviceCell.appendChild(button);
+        };
+      }
+    script.
+      async function getDevices(){
+        fetch('/data/get-data',{
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({meta_data:{
+                    auth_token: "01",
+                    sender: "Localhost",
+                  },
+                 data:{
+                  device_name: 'acl',
+                  db_name: 'acl',
+                 }})
+      })
+          .then(response => response.json())
+          .then(data=> populateDevices(data['devices']))
+      }
+  script.
+      function loadDashboard(){
+        getDevices();
+        
+      }
+  script.
+      window.onload = function(){
+        loadDashboard();
+      }
+>>>>>>> Stashed changes
   body.sb-nav-fixed
     #layoutSidenav
       .mobile-menu
@@ -60,6 +199,7 @@ html(lang="en")
             h1.mt-4 Dashboard
             .row
               .col-auto
+<<<<<<< Updated upstream
                 .card.scheduleCard
                   .card-text
                     table.schedule-table
@@ -97,6 +237,8 @@ html(lang="en")
                 .card.agendaCard.align-items-center
                   button.dbutton(type='button' onclick="window.location.href='/agenda'") Go to Agenda
                   .card-footer.d-flex.align-items-center.justify-content-between
+=======
+>>>>>>> Stashed changes
                 .card.timeCard
                   p(id="today_date") Today's Date
                   p(id="current_date")
@@ -106,9 +248,32 @@ html(lang="en")
                       month = date.getMonth() + 1;
                       day = date.getDate();
                       document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+<<<<<<< Updated upstream
                 .card.logoutCard.align-items-center
                   button.dbutton(type='button' onclick="window.location.href='/'") logout
                   .card-footer.d-flex.align-items-center.justify-content-between
+=======
+                .card.notificationsCard
+                  .card-body Notifications
+                  .card-text
+                    p Notifications
+                  .card-footer.d-flex.align-items-center.justify-content-between
+              
+              .col-auto
+                .card.deviceListCard
+                  .card-body Devices
+                    table.schedule-table#devices-table
+                    
+                    p#device-label
+
+                    table.schedule-table
+                      tr#available-data-table
+
+                    div#data-area
+                  .card-footer.d-flex.align-items-center.justify-content-between
+               
+                
+>>>>>>> Stashed changes
   script(
     crossorigin="anonymous" 
     integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" 
@@ -118,6 +283,7 @@ html(lang="en")
     crossorigin="anonymous" 
     integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" 
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+<<<<<<< Updated upstream
     )
   // script(src="script.js")
 script.
@@ -127,3 +293,6 @@ script.
       // Render the agenda view with the retrieved events
       res.render('agenda', { events });
     });
+=======
+    )
+>>>>>>> Stashed changes

@@ -4,14 +4,22 @@ var TinyDB = require("tinydb");
 async function get_data(data_packet) {
   var errorcode = 310;
 
+<<<<<<< Updated upstream
   db_path =
+=======
+  console.log("Key is: " + data_packet["data"]["k"]);
+
+  path =
+>>>>>>> Stashed changes
     process.env.DB_DEVICE_ROOT_PATH +
     data_packet["data"]["device_name"] +
     "/" +
     data_packet["data"]["db_name"] +
     ".json";
 
-  db = new TinyDB(db_path);
+  console.log(path);
+
+  /*db = new TinyDB(db_path);
 
   const dbResult = await new Promise((resolve) => {
     let result = undefined;
@@ -40,7 +48,30 @@ async function get_data(data_packet) {
     return errorcode;
   } else {
     return dbResult;
-  }
+  }*/
+
+  const Result = new Promise((resolve, reject) => {
+    fs.access(path, fs.constants.F_OK, (err) => {
+      if (err) {
+        resolve(311);
+      } else {
+        fs.readFile(path, (err, data) => {
+          if (err) {
+            resolve(310);
+          } else {
+            try {
+              const jsonData = JSON.parse(data);
+              resolve(jsonData);
+            } catch (parseError) {
+              resolve(310);
+            }
+          }
+        });
+      }
+    });
+  });
+
+  return Result;
 }
 
 module.exports = get_data;

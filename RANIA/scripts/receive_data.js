@@ -34,21 +34,21 @@ async function receive_data(data_packet, instruction) {
       //see boxes 20-29
       //call instruction passed in by data route
       console.log("Call Function");
-      var result = await instruction(data_packet);
-      console.log("[receive_data]", result);
+      result = await instruction(data_packet);
+      console.log("[receive_data: result]", result);
       //return result;
     } else {
       //      set errorcode
-      errorcode = auth;
+      result = auth;
     }
   } else {
     //  set errorcode
-    errorcode = format;
+    result = format;
   }
   //send status code and message to requestor*/
   var returnItem = null;
-  if (result == null || Number.isInteger(result) ) {
-    returnItem = message_list[errorcode];
+  if (Number.isInteger(result)) {
+    returnItem = message_list[result];
   } else {
     returnItem = result;
   }

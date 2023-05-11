@@ -8,7 +8,10 @@ const dotenv = require("dotenv").config();
 async function connect_device(data_packet) {
   var errorcode = 100;
 
-  acl = new TinyDB("./test.db");
+  const deviceToAdd = data_packet["data"];
+  const path = process.env.DB_ACL;
+
+  /*acl = new TinyDB("./test.db");
   //query ACL
 
   acl.onReady = function () {
@@ -29,9 +32,54 @@ async function connect_device(data_packet) {
         //end
       }
     });
-  };
 
-  return errorcode; //return to 01
+
+  };*/
+  const Result = new Promise((resolve, reject) => {
+    fs.access(path, fs.constants.F_OK, (err) => {
+      if (err) {
+        reject(new Error(`File does not exist at ${path}`));
+      } else {
+        fs.readFile(path, "utf8", (readErr, data) => {
+          if (readErr) {
+            console.log("Read Error");
+            resolve(110);
+          } else {
+            try {
+              //console.log(data);
+              const jsonData = JSON.parse(data);
+              console.log("[jsonData]: ", jsonData);
+              if (jsonData.devices[deviceToAdd.device_name]) {
+                resolve(112);
+              } else {
+                jsonData.devices[deviceToAdd.device_name] = {
+                  alias: deviceToAdd.alias,
+                  status: deviceToAdd.status,
+                  auth_code: deviceToAdd.auth_code,
+                };
+                console.log("[jsonData2]: ", jsonData);
+                const updatedData = JSON.stringify(jsonData);
+                console.log("[updatedData]: ", updatedData);
+                fs.writeFile(path, updatedData, (writeErr) => {
+                  if (writeErr) {
+                    console.log("Write Error");
+                    resolve(110);
+                  } else {
+                    resolve(111);
+                  }
+                });
+              }
+            } catch (parseError) {
+              console.log("Parse Error");
+              resolve(110);
+            }
+          }
+        });
+      }
+    });
+  });
+
+  return Result; //return to 01
 }
 
 module.exports = connect_device;

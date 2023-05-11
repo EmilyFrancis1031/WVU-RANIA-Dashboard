@@ -1,22 +1,22 @@
 //This function adds the directory for the device in the rania database
 //see npm FS package
 var TinyDB = require("tinydb");
-var FS = require("fs");
+var fs = require("fs");
 const dotenv = require("dotenv").config();
 
 async function create_database(data_packet) {
-  var errorcode = 100;
+  var errorcode = 340;
 
-  db_path =
+  path =
     process.env.DB_DEVICE_ROOT_PATH +
     data_packet["data"]["device_name"] +
     "/" +
     data_packet["data"]["db_name"] +
     ".json";
 
-  console.log(db_path);
+  //console.log(path);
 
-  db = new TinyDB(db_path);
+  /*db = new TinyDB(db_path);
   //query ACL
 
   const dbResult = await new Promise((resolve) => {
@@ -30,6 +30,24 @@ async function create_database(data_packet) {
       });
       resolve(errorcode);
     };
+  */
+
+  const dbResult = await new Promise((resolve, reject) => {
+    const data = {};
+    fs.access(path, fs.constants.F_OK, (err) => {
+      if (!err) {
+        resolve(342);
+      } else {
+        const jsonString = JSON.stringify(data);
+        fs.writeFile(path, jsonString, (err) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(341);
+          }
+        });
+      }
+    });
   });
 
   return dbResult; //return to 01
