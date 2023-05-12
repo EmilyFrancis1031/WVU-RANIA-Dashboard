@@ -4,6 +4,15 @@
 //Insert data_packet['auth_token'] to access_control.json
 var TinyDB = require("tinydb");
 const dotenv = require("dotenv").config();
+var nodemailer = require("nodemailer");
+
+var transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.TRANSPORTER_USER,
+    pass: process.env.TRANSPORTER_PASSWORD,
+  },
+});
 
 async function connect_device(data_packet) {
   var errorcode = 100;
@@ -11,6 +20,19 @@ async function connect_device(data_packet) {
   const deviceToAdd = data_packet["data"];
   const path = process.env.DB_ACL;
 
+  var mailOptions = {
+    from: process.env.TRANSPORTER_USER,
+    to: "ef00006@mix.wvu.edu",
+    subject: "Sending Email using Node.js",
+    text: "That was easy!",
+  };
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
   /*acl = new TinyDB("./test.db");
   //query ACL
 
