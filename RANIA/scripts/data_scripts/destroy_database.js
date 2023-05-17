@@ -13,13 +13,13 @@ async function destroy_database(data_packet) {
   const Result = await new Promise((resolve, reject) => {
     fs.access(path, fs.constants.F_OK, (err) => {
       if (err) {
-        resolve(345);
+        resolve(352);
       } else {
         fs.unlink(path, (err) => {
           if (err) {
             reject(err);
           } else {
-            resolve(344);
+            resolve(351);
           }
         });
       }

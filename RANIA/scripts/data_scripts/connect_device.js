@@ -169,6 +169,9 @@ async function connect_device(data_packet) {
                                     console.log('Folder created successfully.');
                                   }
                                 });
+                                
+                                const meta_data_path = path.join(folderName, "meta_data.json")
+                                fs.writeFileSync(meta_data_path, JSON.stringify({}, null, 2));
 
                                 //remove device from pending connections
                                 console.log("[ToDelete]: ",PCjsonData[deviceToAdd.device_name])

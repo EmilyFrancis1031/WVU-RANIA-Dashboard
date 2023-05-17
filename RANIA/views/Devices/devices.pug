@@ -35,13 +35,27 @@ html(lang="en")
                   device_name: deviceName,
                   alias: alias,
                   auth_code: code
-                 }})
+        }})
       })
           .then(response => response.json())
           .then(data=> alert(data))
       }
-      function rejectDevice(){
-        
+      function rejectDevice(deviceName){
+        fetch('/data/remove_data',{
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({meta_data:{
+                    auth_token: "01",
+                    sender: "Localhost",
+                  },
+                 data:{
+                  device_name: "acl",
+                  db_name: "pending_connections",
+                  k: deviceName
+                 }})
+      })
+          .then(response => response.json())
+          .then(data=> alert(data))
       }
       function populateDevices(data){
         const table = document.getElementById('pending-conns-table');
@@ -75,9 +89,12 @@ html(lang="en")
           var rejectBtn = document.createElement('button');
           rejectBtn.textContent = "Reject"
           rejectCell.appendChild(rejectBtn);
-
-          
-          
+          rejectCell.addEventListener('click', function() {
+            rejectDevice(key)
+            //console.log('Submitted connection code:', connCodeValue);
+            // Perform any further processing with the connection code value
+          });
+   
         };
       };
       async function getDevices(){

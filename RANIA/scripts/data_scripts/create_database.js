@@ -2,6 +2,7 @@
 //see npm FS package
 var TinyDB = require("tinydb");
 var fs = require("fs");
+const { json } = require("express");
 const dotenv = require("dotenv").config();
 
 async function create_database(data_packet) {
@@ -49,6 +50,36 @@ async function create_database(data_packet) {
       }
     });
   });
+
+  if(dbResult == 341 && data_packet["data"]["db_name"]!="meta_data"){
+    var meta_data_json = process.env.DB_DEVICE_ROOT_PATH +
+    data_packet["data"]["device_name"] +"/" +"meta_data.json";
+    fs.access(meta_data_json, fs.constants.F_OK, (err) => {
+      if (!err) {
+        resolve(342);
+      } else {
+        fs.readFile(meta_data_json, "utf8", (readErr, data) => {
+          if (err) {
+            reject(err);
+            resolve(343)
+          } else {
+            var jsondata = JSON.parse(data)
+            jsondata[data_packet["data"]["db_name"]] = {style: data_packet["data"]["style"]}
+            fs.writeFile(meta_data_json, JSON.stringify(jsondata), (err) => {
+              if (err) {
+                reject(err);
+                resolve(340)
+              } else {
+                resolve(341);
+              }
+            });
+          }
+          
+        });
+        
+      }
+    });
+  }
 
   return dbResult; //return to 01
 }
