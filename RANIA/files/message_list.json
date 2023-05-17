@@ -11,6 +11,8 @@
     "110": "Error Connecting Device",
     "111": "Device Connected Successfully",
     "112": "Device Already Connected",
+    "113": "Device Connection Pending",
+    "114": "Device Connection Refused",
 
     "120": "Error Disconnecting Device",
     "121": "Device Successfully Disconnected",

@@ -22,6 +22,87 @@ html(lang="en")
       href="../../public/stylesheets/dashboard.css" 
       rel="stylesheet"
       )
+    script.
+      function submitCode(deviceName, alias, code){
+        fetch('/data/connect-device',{
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({meta_data:{
+                    auth_token: "01",
+                    sender: "Localhost",
+                  },
+                 data:{
+                  device_name: deviceName,
+                  alias: alias,
+                  auth_code: code
+                 }})
+      })
+          .then(response => response.json())
+          .then(data=> alert(data))
+      }
+      function rejectDevice(){
+        
+      }
+      function populateDevices(data){
+        const table = document.getElementById('pending-conns-table');
+        console.log("[populateDevices]: "+ JSON.stringify(data));
+        const row = table.insertRow(-1);
+        for (const key in data) {
+          
+          var aliasCell = row.insertCell(0);
+          aliasCell.innerHTML=data[key].alias
+
+          var connCodeCell = row.insertCell()
+          var connCodeForm = document.createElement('input');
+          connCodeForm.type = 'text'
+          connCodeForm.name = 'ConnectionCode'
+          connCodeCell.appendChild(connCodeForm)
+
+          var submitCell = row.insertCell()
+          var submitBtn = document.createElement('button');
+          submitBtn.textContent = "Submit"
+          submitCell.appendChild(submitBtn);
+          submitBtn.addEventListener('click', function() {
+            const connCodeValue = connCodeForm.value;
+            const deviceName = key
+            const alias = data[key].alias
+            submitCode(key, alias, connCodeValue)
+            //console.log('Submitted connection code:', connCodeValue);
+            // Perform any further processing with the connection code value
+          });
+
+          var rejectCell = row.insertCell()
+          var rejectBtn = document.createElement('button');
+          rejectBtn.textContent = "Reject"
+          rejectCell.appendChild(rejectBtn);
+
+          
+          
+        };
+      };
+      async function getDevices(){
+        fetch('/data/get-data',{
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({meta_data:{
+                    auth_token: "01",
+                    sender: "Localhost",
+                  },
+                 data:{
+                  device_name: 'acl',
+                  db_name: 'pending_connections',
+                 }})
+      })
+          .then(response => response.json())
+          .then(data=> populateDevices(data))
+      }
+      function loadDashboard(){
+          getDevices();
+          
+        }
+        window.onload = function(){
+          loadDashboard();
+        }
   body.sb-nav-fixed
     #layoutSidenav
       .mobile-menu
@@ -52,47 +133,29 @@ html(lang="en")
       div(id="layoutSidenav_content")
         main
           .container-fluid.px-6
-            h1.mt-4 Devices
+            h1.mt-4 Pending Connections
             .row
               .col-md-6
                 .card.userInfoCard
-                  .card-body Devices
+                  .card-body 
                     .card-text
-                      table.userInfo-table
+                      table.userInfo-table#pending-conns-table
                         tbody
                           tr
-                            td Date of Birth:
-                            td 01/01/1980
+                            th Device Name
+                            th Connection Code
+                            th Accept
+                            th Reject
                           tr
-                            td Account Creation Date:
-                            td 01/01/2020
-                          tr
-                            td Medical Conditions:
+                            td Example
                             td
-                              if medical_conditions && medical_conditions.length
-                                ul
-                                  each condition in medical_conditions
-                                    li #{condition}
-                              else
-                                | No medical conditions found.
-                          tr
-                            td Medications:
+                              input(type="text", name="ConnectionCode")
+                            td 
+                              button(type="button") Submit
                             td
-                              if medications && medications.length
-                                ul
-                                  each medication in medications
-                                    li #{medication}
-                              else
-                                | No medications found.
-                          tr
-                            td Emergency Contacts:
-                            td
-                              if emergency_contacts && emergency_contacts.length
-                                ul
-                                  each contact in emergency_contacts
-                                    li #{contact.name} (#{contact.phone})
-                              else
-                                | No emergency contacts found.
+                              button(type="button") Reject
+
+                          
                   .card-footer.d-flex.align-items-center.justify-content-between
 
   script(
