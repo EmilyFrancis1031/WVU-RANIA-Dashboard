@@ -73,7 +73,7 @@ html(lang="en")
                       .form-group
                         label(for='eventTime') Event Time
                         input#eventTime.form-control(type='time' name='eventTime' placeholder='Enter event time')
-                      button.db-button(type='button' onclick="insertData('/data/insert-data')") Add Event
+                      button.db-button(type='button' onclick="insertData('/data/upsert-data')") Add Event
                       script(src='/public/scripts/call_insert_data.js')
               .col-lg-6.col-md-12
                 .card.mb-4

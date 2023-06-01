@@ -1,0 +1,128 @@
+.card>hr {
+    margin-right: 0;
+    margin-left: 0;
+    box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
+    -webkit-box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
+}
+
+.card-text {
+    font-size: 24px;
+    color: white;
+    /* background-color: var(--card-bg); */
+}
+
+.card-body {
+    padding: 1rem 1rem;
+    /* background-color: var(--card-bg); */
+}
+
+.card-title {
+    /* background-color: var(--card-bg); */
+    margin-bottom: 0.5rem;
+}
+
+.card-link+.card-link {
+    margin-left: 1rem;
+}
+
+.card-footer {
+    padding: 0.5rem 1rem;
+
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+    /* background-color: var(--card-bg); */
+}
+
+.card-footer:last-child {
+    border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px);
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    /* background-color: #fff; */
+    background-clip: border-box;
+    /* border: 1px solid rgba(0, 0, 0, 0.125); */
+    margin-bottom: 20px;
+    /* background-color: #1C2B39; */
+
+}
+
+.scheduleCard {
+
+    --bs-bg-opacity: 1;
+    box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
+    -webkit-box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
+    background-color: var(--card-bg) !important;
+    height: 100%;
+    box-sizing: content-box;
+    white-space: nowrap;
+    font-size: 84px;
+}
+
+.deviceListCard {
+    --bs-bg-opacity: 1;
+    /* box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
+    -webkit-box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1); */
+    box-sizing: content-box;
+    white-space: nowrap;
+    font-size: 52px;
+    color: white;
+    /* background-color: rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important; */
+}
+
+.notificationsCard {
+    --bs-bg-opacity: 1;
+    box-sizing: content-box;
+    white-space: nowrap;
+    font-size: 36px;
+    /* background-color: var(--card-bg); */
+    /* 
+    box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
+    -webkit-box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1); */
+    color: white;
+}
+
+.agendaCard {
+    --bs-bg-opacity: 1;
+    box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
+    -webkit-box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
+    box-sizing: content-box;
+    white-space: nowrap;
+    font-size: 32px;
+    background-color: var(--card-bg);
+    text-align: center;
+
+}
+
+.timeCard {
+    /* --bs-bg-opacity: 1; */
+    box-sizing: content-box;
+    white-space: nowrap;
+    /* box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
+    -webkit-box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1); */
+    font-size: 32px;
+    /* background-color: var(--card-bg) !important; */
+    text-align: center;
+    color: white;
+}
+
+.logoutCard {
+    --bs-bg-opacity: 1;
+    box-sizing: content-box;
+    white-space: nowrap;
+    box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
+    -webkit-box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 10px 10px 0px 0px rgba(0, 0, 0, 1);
+    font-size: 32px;
+    background-color: var(--card-bg) !important;
+    text-align: center;
+}

@@ -1,0 +1,17 @@
+.link-info {
+    color: #0dcaf0;
+}
+
+.link-info:focus,
+.link-info:hover {
+    color: #3dd5f3;
+}
+
+.link-dark {
+    color: #212529;
+}
+
+.link-dark:focus,
+.link-dark:hover {
+    color: #1a1e21;
+}

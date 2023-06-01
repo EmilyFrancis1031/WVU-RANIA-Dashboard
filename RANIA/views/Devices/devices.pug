@@ -57,7 +57,7 @@ html(lang="en")
           .then(response => response.json())
           .then(data=> alert(data))
       }
-      function populateDevices(data){
+      function populatePendingDevices(data){
         const table = document.getElementById('pending-conns-table');
         console.log("[populateDevices]: "+ JSON.stringify(data));
         const row = table.insertRow(-1);
@@ -97,7 +97,7 @@ html(lang="en")
    
         };
       };
-      async function getDevices(){
+      async function getPendingDevices(){
         fetch('/data/get-data',{
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -111,7 +111,7 @@ html(lang="en")
                  }})
       })
           .then(response => response.json())
-          .then(data=> populateDevices(data))
+          .then(data=> populatePendingDevices(data))
       }
       function loadDashboard(){
           getDevices();
@@ -138,11 +138,12 @@ html(lang="en")
         nav#sidenavAccordion.sb-sidenav.accordion.sb-sidenav-dark
           .sb-sidenav-menu
             .nav
-              a.nav-title(href="/dashboard") RANIA
-              .sb-sidenav-menu-heading Page Actions
-              a.nav-link(href="/dashboard") Back to Dashboard
-              
-              
+              a.nav-title RANIA
+              a.nav-link(href="/dashboard") Dashboard
+              a.nav-link-active Manage Devices
+              //- a.nav-link(href="/settings") User Info
+              //- a.nav-link(href="/agenda") Manage Your Agenda
+          
           .sb-sidenav-footer
             .small Logged in as:
             | UserName

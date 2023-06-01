@@ -1,7 +1,7 @@
 //calls tiny_db remove
 var TinyDB = require("tinydb");
 async function remove_data(data_packet) {
-  var errorcode = 310;
+  var result = 310;
 
   db_path =
     process.env.DB_DEVICE_ROOT_PATH +
@@ -9,7 +9,7 @@ async function remove_data(data_packet) {
     "/" +
     data_packet["data"]["db_name"] +
     ".json";
-
+  console.log("[db_path]: ", db_path)
   /*db = new TinyDB(db_path);
 
   const dbResult = await new Promise((resolve) => {
@@ -44,18 +44,19 @@ async function remove_data(data_packet) {
     return dbResult;
   }*/
   const jsonData = JSON.parse(fs.readFileSync(db_path, 'utf8'));
-
+  console.log('[jsonData]: ', jsonData)
   // Check if the searchKey exists in the JSON data
-  if (jsonData.hasOwnProperty(searchKey)) {
+  if (jsonData.hasOwnProperty(data_packet["data"]["k"])) {
     // Delete the key from the JSON data
     delete jsonData[data_packet["data"]["k"]];
 
     // Write the updated JSON back to the file
     fs.writeFileSync(db_path, JSON.stringify(jsonData, null, 2));
 
-    console.log(`Key "${searchKey}" deleted successfully from ${filePath}.`);
+    console.log(`Key "${data_packet["data"]["k"]}" deleted successfully from ${db_path}.`);
+    result = 301
   } else {
-    console.log(`Key "${searchKey}" not found in ${filePath}. No changes made.`);
+    console.log(`Key "${data_packet["data"]["k"]}" not found in ${db_path}. No changes made.`);
   }
 
 

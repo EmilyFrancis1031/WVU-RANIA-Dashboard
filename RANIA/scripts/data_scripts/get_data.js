@@ -4,7 +4,7 @@ var TinyDB = require("tinydb");
 async function get_data(data_packet) {
   var errorcode = 310;
 
-  console.log("Key is: " + data_packet["data"]["k"]);
+  //console.log("Key is: " + data_packet["data"]["k"]);
 
   path =
     process.env.DB_DEVICE_ROOT_PATH +
@@ -13,7 +13,7 @@ async function get_data(data_packet) {
     data_packet["data"]["db_name"] +
     ".json";
 
-  console.log(path);
+  //console.log(path);
 
   /*db = new TinyDB(db_path);
 
@@ -56,7 +56,9 @@ async function get_data(data_packet) {
             resolve(310);
           } else {
             try {
+              //console.log("[get_data jsonData]: ", jsonData)
               const jsonData = JSON.parse(data);
+              //console.log("[get_data jsonData]: ", jsonData)
               resolve(jsonData);
             } catch (parseError) {
               resolve(310);
@@ -66,7 +68,7 @@ async function get_data(data_packet) {
       }
     });
   });
-
+  console.log("[get_data Result]: ", Result)
   return Result;
 }
 

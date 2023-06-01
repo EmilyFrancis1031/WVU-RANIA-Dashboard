@@ -1,87 +1,50 @@
 //This function adds the directory for the device in the rania database
-//see npm FS package
-var TinyDB = require("tinydb");
-var fs = require("fs");
-const { json } = require("express");
-const dotenv = require("dotenv").config();
+const build_db_path = require("../helper_scripts/build_db_path");
+const check_file_exists = require("../helper_scripts/check_file_exists");
+const write_to_file = require("../helper_scripts/write_to_file")
+const read_file = require("../helper_scripts/read_file")
+const parse_json = require("../helper_scripts/parse_json");
 
 async function create_database(data_packet) {
-  var errorcode = 340;
+  var response_code = 340;
+  var path = build_db_path(data_packet["data"]["device_name"], data_packet["data"]["db_name"])
 
-  path =
-    process.env.DB_DEVICE_ROOT_PATH +
-    data_packet["data"]["device_name"] +
-    "/" +
-    data_packet["data"]["db_name"] +
-    ".json";
+  //check if data file already exists
+  var db_file_exists = await check_file_exists(path)
 
-  //console.log(path);
-
-  /*db = new TinyDB(db_path);
-  //query ACL
-
-  const dbResult = await new Promise((resolve) => {
-    db.onReady = function (err) {
-      db.setInfo("_default", {}, function (err, key, value) {
-        if (err) {
-          console.error(err);
-          errorcode = 340;
-        }
-        errorcode = 341;
-      });
-      resolve(errorcode);
-    };
-  */
-
-  const dbResult = await new Promise((resolve, reject) => {
-    const data = {};
-    fs.access(path, fs.constants.F_OK, (err) => {
-      if (!err) {
-        resolve(342);
-      } else {
-        const jsonString = JSON.stringify(data);
-        fs.writeFile(path, jsonString, (err) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(341);
-          }
-        });
-      }
-    });
-  });
-
-  if(dbResult == 341 && data_packet["data"]["db_name"]!="meta_data"){
-    var meta_data_json = process.env.DB_DEVICE_ROOT_PATH +
-    data_packet["data"]["device_name"] +"/" +"meta_data.json";
-    fs.access(meta_data_json, fs.constants.F_OK, (err) => {
-      if (!err) {
-        resolve(342);
-      } else {
-        fs.readFile(meta_data_json, "utf8", (readErr, data) => {
-          if (err) {
-            reject(err);
-            resolve(343)
-          } else {
-            var jsondata = JSON.parse(data)
-            jsondata[data_packet["data"]["db_name"]] = {style: data_packet["data"]["style"]}
-            fs.writeFile(meta_data_json, JSON.stringify(jsondata), (err) => {
-              if (err) {
-                reject(err);
-                resolve(340)
-              } else {
-                resolve(341);
-              }
-            });
-          }
-          
-        });
-        
-      }
-    });
+  if(db_file_exists){
+    response_code = 342
   }
-
-  return dbResult; //return to 01
+  else{
+    var db_write_result = await write_to_file(path);
+    if(db_write_result==15){
+      var meta_data_path = build_db_path(data_packet["data"]["device_name"], "meta_data")
+      var meta_data_exists = await check_file_exists(meta_data_path)
+      if(meta_data_exists){
+        var meta_data = await read_file(meta_data_path)
+        var jsondata = parse_json(meta_data)
+        if(jsondata != 10){
+          jsondata[data_packet["data"]["db_name"]] = {style: data_packet["data"]["style"]}  
+          var meta_data_write_result = await write_to_file(meta_data_path, jsondata)
+          if(meta_data_write_result == 15){
+            response_code = 341
+          }
+          else{
+            response_code = 345
+          }
+        }
+        else{
+          response_code = 344
+        }
+      }
+      else{
+        response_code = 343
+      }
+    }
+    else{
+      response_code = 340
+    } 
+  }
+  return response_code
 }
-
 module.exports = create_database;

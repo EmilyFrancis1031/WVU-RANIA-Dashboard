@@ -1,27 +1,34 @@
 html(lang="en")
   head
     meta(charset="utf-8")
-    meta(
-      content="IE=edge" 
-      http-equiv="X-UA-Compatible"
-      )
-    meta(
-      content="width=device-width, initial-scale=1.0" 
-      name="viewport"
-      )
-    meta(
-      content="" 
-      name="description"
-      )
-    meta(
-      content="" 
-      name="author"
-      )
+    meta(content="IE=edge" http-equiv="X-UA-Compatible")
+    meta(content="width=device-width, initial-scale=1.0" name="viewport")
+    meta(content="" name="description")
+    meta(content="" name="author")
+
     title RANIA Dashboard
-    link(
-      href="../../public/stylesheets/dashboard.css" 
-      rel="stylesheet"
-      )
+
+    link(href="../../public/stylesheets/dashboard.css" rel="stylesheet")
+    link(href="../../public/stylesheets/button.css" rel="stylesheet")
+    link(href="../../public/stylesheets/col.css" rel="stylesheet")
+    link(href="../../public/stylesheets/root.css" rel="stylesheet")
+    link(href="../../public/stylesheets/hr.css" rel="stylesheet")
+    link(href="../../public/stylesheets/container.css" rel="stylesheet")
+    link(href="../../public/stylesheets/ul.css" rel="stylesheet")
+    link(href="../../public/stylesheets/dropdown.css" rel="stylesheet")
+    link(href="../../public/stylesheets/nav.css" rel="stylesheet")
+    link(href="../../public/stylesheets/mobile.css" rel="stylesheet")
+    link(href="../../public/stylesheets/sb.css" rel="stylesheet")
+    link(href="../../public/stylesheets/card.css" rel="stylesheet")
+    link(href="../../public/stylesheets/accordion.css" rel="stylesheet")
+    link(href="../../public/stylesheets/misc.css" rel="stylesheet")
+    link(href="../../public/stylesheets/table.css" rel="stylesheet")
+    link(href="../../public/stylesheets/link.css" rel="stylesheet")
+
+
+    
+
+
 
     script.
       function generateTable(jsonData){
@@ -102,17 +109,19 @@ html(lang="en")
          
         const table = document.getElementById('devices-table');
         console.log("[populateDevices]: "+ JSON.stringify(data));
+        const devices = data['devices']
         const row = table.insertRow(-1);
-        for (const key in data) {
-          
+        for (const key in devices) {
+          console.log(key)
           const deviceCell = row.insertCell(0);
           const button = document.createElement('button');
-          button.textContent = data[key]['alias'];
+          button.textContent = devices[key]['alias'];
+          button.classList.add('btn');
           button.onclick = function() {
             document.getElementById("data-area").innerHTML = ""
             getAvailableData(key);
             const label = document.getElementById('device-label')
-            label.innerHTML = data[key].alias
+            label.innerHTML = devices[key].alias
           };
           deviceCell.appendChild(button);
         };
@@ -126,6 +135,7 @@ html(lang="en")
           const deviceCell = row.insertCell(0);
           const button = document.createElement('button');
           button.textContent = key;
+          button.classList.add('btn2')
           button.onclick = function() {
             
             getDatabaseData(device, key, data[key])
@@ -151,12 +161,141 @@ html(lang="en")
           .then(data=> populateDevices(data['devices']))
       }
     script.
-        function loadDashboard(){
-          getDevices();
+      function submitCode(deviceName, alias, code){
+        fetch('/data/connect-device',{
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({meta_data:{
+                    auth_token: "01",
+                    sender: "Localhost",
+                  },
+                 data:{
+                  device_name: deviceName,
+                  alias: alias,
+                  auth_code: code
+        }})
+      })
+          .then(response => response.json())
+          .then(data=> alert(data))
+      }
+      function rejectDevice(deviceName){
+        fetch('/data/remove-data',{
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({meta_data:{
+                    auth_token: "01",
+                    sender: "Localhost",
+                  },
+                 data:{
+                  device_name: "acl",
+                  db_name: "pending_connections",
+                  k: deviceName
+                 }})
+      })
+          .then(response => response.json())
+          .then(data=> alert(data))
+      }
+      function populatePendingDevices(data){
+        const table = document.getElementById('pending-conns-table');
+        console.log("[populatePendingDevices]: "+ JSON.stringify(data));
+        const row = table.insertRow(-1);
+        for (const key in data) {
           
-        }
+          var aliasCell = row.insertCell(0);
+          aliasCell.innerHTML=data[key].alias
+
+          var connCodeCell = row.insertCell()
+          var connCodeForm = document.createElement('input');
+          connCodeForm.type = 'text'
+          connCodeForm.name = 'ConnectionCode'
+          connCodeCell.appendChild(connCodeForm)
+
+          var submitCell = row.insertCell()
+          var submitBtn = document.createElement('button');
+          submitBtn.textContent = "Submit"
+          submitBtn.classList.add('btn-accept')
+          submitCell.appendChild(submitBtn);
+          submitBtn.addEventListener('click', function() {
+            const connCodeValue = connCodeForm.value;
+            const deviceName = key
+            const alias = data[key].alias
+            submitCode(key, alias, connCodeValue)
+            //console.log('Submitted connection code:', connCodeValue);
+            // Perform any further processing with the connection code value
+          });
+
+          var rejectCell = row.insertCell()
+          var rejectBtn = document.createElement('button');
+          rejectBtn.textContent = "Reject"
+          rejectBtn.classList.add('btn-reject')
+          rejectCell.appendChild(rejectBtn);
+          rejectCell.addEventListener('click', function() {
+            rejectDevice(key)
+            //console.log('Submitted connection code:', connCodeValue);
+            // Perform any further processing with the connection code value
+          });
+   
+        };
+      };
+      async function getPendingDevices(){
+        fetch('/data/get-data',{
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({meta_data:{
+                    auth_token: "01",
+                    sender: "Localhost",
+                  },
+                 data:{
+                  device_name: 'acl',
+                  db_name: 'pending_connections',
+                 }})
+      })
+          .then(response => response.json())
+          .then(data=> populatePendingDevices(data))
+      }
+    script.
         window.onload = function(){
-          loadDashboard();
+          fetch('/data/get-data', {
+                          method: "POST",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({meta_data:{
+                                    auth_token: "01",
+                                    sender: "Localhost",
+                                  },
+                                data:{
+                                  device_name: 'acl',
+                                  db_name: 'pending_connections',
+                                }})
+                      })
+            .then(response1 => response1.json())
+            .then(responseData1 => {
+              // Process response of the first request
+              populatePendingDevices(responseData1)
+              // Trigger the second request
+              return fetch('/data/get-data', {
+                          method: "POST",
+                          headers: { "Content-Type": "application/json" },
+                          body: JSON.stringify({meta_data:{
+                                    auth_token: "01",
+                                    sender: "Localhost",
+                                  },
+                                data:{
+                                  device_name: 'acl',
+                                  db_name: 'acl',
+                                }})
+                      })
+            })
+            .then(response2 => response2.json())
+            .then(responseData2 => {
+              // Process response of the second request
+              populateDevices(responseData2)
+              // Continue with additional logic or handle the combined result
+            })
+            .catch(error => {
+              // Handle any errors that occur during the fetch requests
+              console.error('Error:', error);
+            });
+
         }
   body.sb-nav-fixed
     #layoutSidenav
@@ -178,20 +317,21 @@ html(lang="en")
         nav#sidenavAccordion.sb-sidenav.accordion.sb-sidenav-dark
           .sb-sidenav-menu
             .nav
-              a.nav-title(href="/dashboard") RANIA
-              .sb-sidenav-menu-heading Page Actions
-              a.nav-link(href="/devices") Manage Devices
-              a.nav-link(href="/settings") User Info
-              a.nav-link(href="/agenda") Manage Your Agenda
+              a.nav-title RANIA
+              a.nav-link-active Dashboard
+              //- a.nav-link(href="/devices") Manage Devices
+              //- a.nav-link(href="/settings") User Info
+              //- a.nav-link(href="/agenda") Manage Your Agenda
           .sb-sidenav-footer
             .small Logged in as:
             | UserName
+            button.db-button(type='button' onclick="window.location.href='/'") logout
       div(id="layoutSidenav_content")
         main
           .container-fluid.px-6
             h1.mt-4 Dashboard
             .row
-              .col-auto
+              .col-1
                 .card.timeCard
                   p(id="today_date") Today's Date
                   p(id="current_date")
@@ -201,25 +341,38 @@ html(lang="en")
                       month = date.getMonth() + 1;
                       day = date.getDate();
                       document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+                hr
                 .card.notificationsCard
                   .card-body Notifications
                   .card-text
                     p Notifications
-                  .card-footer.d-flex.align-items-center.justify-content-between
-              
-              .col-auto
+                  //- .card-footer.d-flex.align-items-center.justify-content-between
+                hr
+                .card.notificationsCard
+                  .card-body Pending Connections
+                    .card-text
+                      table.userInfo-table#pending-conns-table
+                        tbody
+                          tr
+                            th  Device Name
+                            th  Connection Code
+                            th  Accept
+                            th  Reject
+                          tr
+
+              .col-2
                 .card.deviceListCard
                   .card-body Devices
                     table.schedule-table#devices-table
-                    
+                    hr
                     p#device-label
 
                     table.schedule-table
                       tr#available-data-table
 
                     div#data-area
-                  .card-footer.d-flex.align-items-center.justify-content-between
-               
+                  //- .card-footer.d-flex.align-items-center.justify-content-between
+                
                 
   script(
     crossorigin="anonymous" 

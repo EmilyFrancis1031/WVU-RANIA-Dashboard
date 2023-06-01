@@ -1,7 +1,13 @@
 {
     "0": "Success",
-
     "1": "Undefined error",
+
+    "10": "Error Parsing JSON",
+    "11": "JSON successfully parsed",
+    "15": "Successfully wrote to file",
+    "16": "Error writing to file",
+    "20": "Successfully read file",
+    "21": "Error in reading file",
 
     "100": "Error in authentication",
     "101": "Authentication Successful",
@@ -26,7 +32,6 @@
     "205": "data_packet['data'] is missing",
 
     "300": "Error processing instruction",
-
     "310": "Error getting data",
     "311": "Database does not exist, could not get data",
 
@@ -34,12 +39,15 @@
     "331": "Data upserted Successfully",
     "332": "Database does not exists, counld not upsert data",
     "333": "Error Parsing JSON data",
-    
-    "340": "Error creating Database",
-    "341": "Database Created Successfully",
-    "342": "Database Already Exists",
 
-    "343": "Error destroying database",
-    "344": "Database Destroyed Successfully",
-    "345": "Database does not exists, could not be destroyed"
+    "340": "Error creating Database",
+    "341": "Database Created and added to meta_data Successfully",
+    "342": "Database Already Exists",
+    "343": "meta_data file does not exist for this device",
+    "344": "Error parsing meta_data for this device",
+    "345": "Error updating meta_data for this device",
+    
+    "350": "Database Destroyed Successfully",
+    "351": "Error destroying database",
+    "352": "Database does not exists, could not be destroyed"
 }

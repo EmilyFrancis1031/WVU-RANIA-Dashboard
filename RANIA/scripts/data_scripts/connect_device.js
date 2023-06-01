@@ -44,13 +44,7 @@ async function connect_device(data_packet) {
       "\n\nIf you did not initiate this request, please ignore this email.",
   };
 
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      //console.log(error);
-    } else {
-      //console.log("Email sent: " + info.response);
-    }
-  });
+  
 
   const Result1 = undefined
 
@@ -126,6 +120,13 @@ async function connect_device(data_packet) {
                                   console.log("Write Error in Pending Conns");
                                   resolve(110);
                                 } else {
+                                  transporter.sendMail(mailOptions, function (error, info) {
+                                    if (error) {
+                                      //console.log(error);
+                                    } else {
+                                      //console.log("Email sent: " + info.response);
+                                    }
+                                  });
                                   resolve(113);
                                 }
                               });
