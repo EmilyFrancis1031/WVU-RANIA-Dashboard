@@ -1,66 +1,32 @@
 //removes device from acl
-var TinyDB = require("tinydb");
-const dotenv = require("dotenv").config();
+const write_to_file = require("../helper_scripts/write_to_file")
+const read_file = require("../helper_scripts/read_file")
+const parse_json = require("../helper_scripts/parse_json");
 
 async function disconnect_device(data_packet) {
-  var errorcode = 100;
+  var response_code = 100;
 
-  /*acl = new TinyDB("./test.db");
-  //query ACL
-
-  acl.onReady = function () {
-    //query access list with auth_token
-    acl.getInfo(data_packet["meta_data"], function (err, key, value) {
-      //if error retreiving data
-      if (err) {
-        console.log(err);
-        return;
-      }
-      //if the auth_code is correct in the ACL
-      else if (value == data_packet["auth_token"]) {
-        //set errorcode to success
-        errorcode = 101;
-      } else {
-        //set errorcode
-        errorcode = 102;
-        //end
-      }
-    });
-  };
-  */
   const path = process.env.DB_ACL;
-  const deviceName = data_packet["data"]["device_name"];
 
-  const Result = new Promise((resolve, reject) => {
-    fs.readFile(path, "utf8", (err, data) => {
-      if (err) {
-        resolve(120);
-      } else {
-        let aclJson;
-        try {
-          aclJson = JSON.parse(data);
-        } catch (parseError) {
-          resolve(120);
-        }
-
-        if (aclJson.devices && aclJson.devices[deviceName]) {
-          delete aclJson.devices[deviceName];
-
-          fs.writeFile(path, JSON.stringify(aclJson), "utf8", (err) => {
-            if (err) {
-              resolve(120);
-            } else {
-              resolve(121);
-            }
-          });
-        } else {
-          resolve(122);
-        }
+  var data = await read_file(path)
+  if(data!=21){
+    var jsondata = parse_json(data)
+    if(jsondata == 10){
+      //error parsing acl
+      response_code = 120
+    }
+    else{
+      delete jsondata.devices[data_packet["data"]["device_name"]];
+      var acl_write_result = await write_to_file(path, jsondata)
+      if(acl_write_result == 15){
+        response_code = 121
       }
-    });
-  });
-
-  return Result; //return to 01
+      else{
+        response_code = 120
+      }
+    }
+  }
+  return response_code; //return to 01
 }
 
 module.exports = disconnect_device;

@@ -19,6 +19,7 @@
     "112": "Device Already Connected",
     "113": "Device Connection Pending",
     "114": "Device Connection Refused",
+    "115": "ACL could not be found",
 
     "120": "Error Disconnecting Device",
     "121": "Device Successfully Disconnected",
@@ -47,7 +48,7 @@
     "344": "Error parsing meta_data for this device",
     "345": "Error updating meta_data for this device",
     
-    "350": "Database Destroyed Successfully",
-    "351": "Error destroying database",
+    "350": "Error destroying database",
+    "351": "Database Destroyed Successfully and removed from meta_data",
     "352": "Database does not exists, could not be destroyed"
 }

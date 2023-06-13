@@ -1,75 +1,24 @@
 //calls tiny_db get
-var TinyDB = require("tinydb");
+const build_db_path = require("../helper_scripts/build_db_path");
+const check_file_exists = require("../helper_scripts/check_file_exists")
+const read_file = require("../helper_scripts/read_file")
+const parse_json = require("../helper_scripts/parse_json");
 
 async function get_data(data_packet) {
-  var errorcode = 310;
+  var response_code = 310;
 
-  //console.log("Key is: " + data_packet["data"]["k"]);
+  var path = build_db_path(data_packet["data"]["device_name"], data_packet["data"]["db_name"])
 
-  path =
-    process.env.DB_DEVICE_ROOT_PATH +
-    data_packet["data"]["device_name"] +
-    "/" +
-    data_packet["data"]["db_name"] +
-    ".json";
-
-  //console.log(path);
-
-  /*db = new TinyDB(db_path);
-
-  const dbResult = await new Promise((resolve) => {
-    let result = undefined;
-    db.onReady = function () {
-      db.getInfo(data_packet["data"]["k"], function (err, key, value) {
-        if (err) {
-          console.error(err);
-          errorcode = 310;
-        }
-
-        result = { data: value };
-        resolve(result);
-      });
-    };
-  });
-
-  // const resultPromise = new Promise(db.onReady)
-
-  // resultPromise
-  // .then(console.log("[promise_accepted]",result))
-  // .catch(console.log("[promise_rejected]: ",result))
-
-  console.log("[get_data]: ", dbResult);
-  //return to 01
-  if (dbResult == null) {
-    return errorcode;
-  } else {
-    return dbResult;
-  }*/
-
-  const Result = new Promise((resolve, reject) => {
-    fs.access(path, fs.constants.F_OK, (err) => {
-      if (err) {
-        resolve(311);
-      } else {
-        fs.readFile(path, (err, data) => {
-          if (err) {
-            resolve(310);
-          } else {
-            try {
-              //console.log("[get_data jsonData]: ", jsonData)
-              const jsonData = JSON.parse(data);
-              //console.log("[get_data jsonData]: ", jsonData)
-              resolve(jsonData);
-            } catch (parseError) {
-              resolve(310);
-            }
-          }
-        });
-      }
-    });
-  });
-  console.log("[get_data Result]: ", Result)
-  return Result;
+  var db_file_exists = await check_file_exists(path)
+  if(db_file_exists){
+    var data = await read_file(path)
+    var jsondata = parse_json(data)
+    response_code = jsondata
+  }
+  else{
+    response_code = 311
+  }
+  return response_code;
 }
 
 module.exports = get_data;

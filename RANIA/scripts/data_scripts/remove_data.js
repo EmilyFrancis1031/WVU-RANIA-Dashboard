@@ -1,65 +1,26 @@
 //calls tiny_db remove
-var TinyDB = require("tinydb");
+const build_db_path = require("../helper_scripts/build_db_path");
+const check_file_exists = require("../helper_scripts/check_file_exists")
+const write_to_file = require("../helper_scripts/write_to_file")
+const read_file = require("../helper_scripts/read_file")
+const parse_json = require("../helper_scripts/parse_json");
+const delete_key_from_json = require("../helper_scripts/delete_key_from_json")
 async function remove_data(data_packet) {
-  var result = 310;
+  var response_code = 310;
 
-  db_path =
-    process.env.DB_DEVICE_ROOT_PATH +
-    data_packet["data"]["device_name"] +
-    "/" +
-    data_packet["data"]["db_name"] +
-    ".json";
-  console.log("[db_path]: ", db_path)
-  /*db = new TinyDB(db_path);
+  db_path = build_db_path(data_packet["data"]["device_name"], data_packet["data"]["db_name"])
 
-  const dbResult = await new Promise((resolve) => {
-    let result = undefined;
-    db.onReady = function () {
-      db.findByIdAndRemove(
-        data_packet["data"]["k"],
-        function (err, key, value) {
-          if (err) {
-            console.error(err);
-            errorcode = 310;
-          }
-
-          result = { data: value };
-          resolve(result);
-        }
-      );
-    };
-  });*/
-
-  // const resultPromise = new Promise(db.onReady)
-
-  // resultPromise
-  // .then(console.log("[promise_accepted]",result))
-  // .catch(console.log("[promise_rejected]: ",result))
-
-  //console.log("[get_data]: ", dbResult);
-  //return to 01
-  /*if (dbResult == null) {
-    return errorcode;
-  } else {
-    return dbResult;
-  }*/
-  const jsonData = JSON.parse(fs.readFileSync(db_path, 'utf8'));
-  console.log('[jsonData]: ', jsonData)
-  // Check if the searchKey exists in the JSON data
-  if (jsonData.hasOwnProperty(data_packet["data"]["k"])) {
-    // Delete the key from the JSON data
-    delete jsonData[data_packet["data"]["k"]];
-
-    // Write the updated JSON back to the file
-    fs.writeFileSync(db_path, JSON.stringify(jsonData, null, 2));
-
-    console.log(`Key "${data_packet["data"]["k"]}" deleted successfully from ${db_path}.`);
-    result = 301
-  } else {
-    console.log(`Key "${data_packet["data"]["k"]}" not found in ${db_path}. No changes made.`);
+  var db_file_exists = await check_file_exists(db_path)
+  
+  if(db_file_exists){
+    var data = await read_file(db_path)
+    var json_data = parse_json(data)
+    if(json_data!=10){
+      var new_json_data = delete_key_from_json(json_data)
+      var db_write_result = write_to_file(db_path, new_json_data)
+    }
   }
-
-
+  return response_code
 }
 
 module.exports = remove_data;

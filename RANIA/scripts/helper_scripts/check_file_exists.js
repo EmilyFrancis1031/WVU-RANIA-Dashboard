@@ -1,4 +1,4 @@
-const build_db_path = require("../helper_scripts/build_db_path");
+const fs = require("fs")
 
 function check_file_exists(path){
     return new Promise((resolve, reject) => {
