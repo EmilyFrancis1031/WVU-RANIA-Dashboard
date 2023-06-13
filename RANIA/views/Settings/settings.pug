@@ -1,4 +1,3 @@
-doctype html
 html(lang="en")
   head
     meta(charset="utf-8")
@@ -18,9 +17,9 @@ html(lang="en")
       content="" 
       name="author"
       )
-    title RANIA Dashboard
+    title User Info
     link(
-      href="..\..\..\RANIA\public\stylesheets\dashboard.css" 
+      href="../../public/stylesheets/dashboard.css" 
       rel="stylesheet"
       )
   body.sb-nav-fixed
@@ -34,102 +33,76 @@ html(lang="en")
         label(for="hamb") ☰
         ul.mobile
           li
-            a.nav-link(href="index.html") Add Device
+            a.nav-link(href="/dashboard") Dashboard
           li
-            a.nav-link(href="index.html") Remove Device
-          li
-            a.nav-link(href="index.html") Edit Smart Devices
-          li
-            a.nav-link(href="index.html") Edit Resident Info
-          li
-            a.nav-link(href="index.html") Edit Contact Info
-          li
-            a.nav-link(href="index.html") Send data to...
+            a.nav-link(href="index.html") Edit Medical Conditions
       div(id="layoutSidenav_nav")
         nav#sidenavAccordion.sb-sidenav.accordion.sb-sidenav-dark
           .sb-sidenav-menu
             .nav
-              a.nav-title(href="index.html") RANIA Home
-              .sb-sidenav-menu-heading Settings
-              a.nav-link(href="index.html") Add Device
-              a.nav-link(href="index.html") Remove Device
-              a.nav-link(href="index.html") Edit Smart Devices
-              a.nav-link(href="index.html") Edit Resident Info
-              a.nav-link(href="index.html") Edit Contact Info
-              a.nav-link(href="index.html") Send data to...
+              a.nav-title(href="/dashboard") RANIA
+              .sb-sidenav-menu-heading Page Actions
+              a.nav-link(href="/dashboard") Back to Dashboard
+              a.nav-link(href="/personal") Change Personal Info
+              a.nav-link(href="/medical") Edit Medical Conditions
+              a.nav-link(href="/medications") Edit Medications
+              a.nav-link(href="/contacts") Change Emergency Contacts 
+              
           .sb-sidenav-footer
             .small Logged in as:
             | UserName
+            button.db-button(type='button' onclick="window.location.href='/'") logout
       div(id="layoutSidenav_content")
         main
           .container-fluid.px-6
-            h1.mt-4 Dashboard
+            h1.mt-4 User Info
             .row
-              .col-auto
-                .card.scheduleCard
-                  .card-body Schedule
-                  .card-text
-                    table.schedule-table
-                      tbody
-                        tr
-                          td 12:00
-                          td Do Something
-                        tr
-                          td 12:30
-                          td Do Something
-                        tr
-                          td 3:00
-                          td Do Something
-                        tr
-                          td 4:30
-                          td Do Something
-                        tr
-                          td 8:00
-                          td Do Something
+              .col-md-6
+                .card.userInfoCard
+                  .card-body User Information
+                    .card-text
+                      table.userInfo-table
+                        tbody
+                          tr
+                            td Date of Birth:
+                            td 01/01/1980
+                          tr
+                            td Account Creation Date:
+                            td 01/01/2020
+                          tr
+                            td Medical Conditions:
+                            td
+                              if medical_conditions && medical_conditions.length
+                                ul
+                                  each condition in medical_conditions
+                                    li #{condition}
+                              else
+                                | No medical conditions found.
+                          tr
+                            td Medications:
+                            td
+                              if medications && medications.length
+                                ul
+                                  each medication in medications
+                                    li #{medication}
+                              else
+                                | No medications found.
+                          tr
+                            td Emergency Contacts:
+                            td
+                              if emergency_contacts && emergency_contacts.length
+                                ul
+                                  each contact in emergency_contacts
+                                    li #{contact.name} (#{contact.phone})
+                              else
+                                | No emergency contacts found.
                   .card-footer.d-flex.align-items-center.justify-content-between
-              .col-auto
-                .card.deviceListCard
-                  .card-body Device List
-                  .card-text
-                    ul.device-list
-                      li
-                        button.db-button Device 1
-                      li
-                        button.db-button Device 2
-                      li
-                        button.db-button Device 3
-                      li
-                        button.db-button Device 4
-                  .card-footer.d-flex.align-items-center.justify-content-between
-                .card.notificationsCard
-                  .card-body Notifications
-                  .card-text
-                    p Notifications
-                  .card-footer.d-flex.align-items-center.justify-content-between
-              .col-auto
-                .card.agendaCard
-                  .card-body Agenda
-                  .card-footer.d-flex.align-items-center.justify-content-between
-                .card.timeCard
-                  p(id="today_date") Today's Date
-                  p(id="current_date")
-                  script.
-                    date = new Date();
-                      year = date.getFullYear();
-                      month = date.getMonth() + 1;
-                      day = date.getDate();
-                      document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
-                .card.logoutCard
-                  .card-body Logout
-                  .card-footer.d-flex.align-items-center.justify-content-between
+
   script(
     crossorigin="anonymous" 
+   
+
     integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" 
     src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
     )
-  script(
-    crossorigin="anonymous" 
-    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" 
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-    )
-  script(src="script.js")
+ 

@@ -1,34 +1,32 @@
 //removes device from acl
-var TinyDB = require("tinydb");
-const dotenv = require("dotenv").config();
+const write_to_file = require("../helper_scripts/write_to_file")
+const read_file = require("../helper_scripts/read_file")
+const parse_json = require("../helper_scripts/parse_json");
 
 async function disconnect_device(data_packet) {
-  var errorcode = 100;
+  var response_code = 100;
 
-  acl = new TinyDB("./test.db");
-  //query ACL
+  const path = process.env.DB_ACL;
 
-  acl.onReady = function () {
-    //query access list with auth_token
-    acl.getInfo(data_packet["meta_data"], function (err, key, value) {
-      //if error retreiving data
-      if (err) {
-        console.log(err);
-        return;
+  var data = await read_file(path)
+  if(data!=21){
+    var jsondata = parse_json(data)
+    if(jsondata == 10){
+      //error parsing acl
+      response_code = 120
+    }
+    else{
+      delete jsondata.devices[data_packet["data"]["device_name"]];
+      var acl_write_result = await write_to_file(path, jsondata)
+      if(acl_write_result == 15){
+        response_code = 121
       }
-      //if the auth_code is correct in the ACL
-      else if (value == data_packet["auth_token"]) {
-        //set errorcode to success
-        errorcode = 101;
-      } else {
-        //set errorcode
-        errorcode = 102;
-        //end
+      else{
+        response_code = 120
       }
-    });
-  };
-
-  return errorcode; //return to 01
+    }
+  }
+  return response_code; //return to 01
 }
 
 module.exports = disconnect_device;

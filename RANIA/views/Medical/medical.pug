@@ -1,0 +1,105 @@
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(
+      content="IE=edge" 
+      http-equiv="X-UA-Compatible"
+      )
+    meta(
+      content="width=device-width, initial-scale=1.0" 
+      name="viewport"
+      )
+    meta(
+      content="" 
+      name="description"
+      )
+    meta(
+      content="" 
+      name="author"
+      )
+    title User Info
+    link(
+      href="../../public/stylesheets/dashboard.css" 
+      rel="stylesheet"
+      )
+  body.sb-nav-fixed
+    #layoutSidenav
+      .mobile-menu
+        input#hamburger(
+          value="hamb" 
+          name="hamb" 
+          type="checkbox"
+          )
+        label(for="hamb") ☰
+        ul.mobile
+          li
+            a.nav-link(href="/dashboard") Dashboard
+          li
+            a.nav-link(href="index.html") Edit Medical Conditions
+      div(id="layoutSidenav_nav")
+        nav#sidenavAccordion.sb-sidenav.accordion.sb-sidenav-dark
+          .sb-sidenav-menu
+            .nav
+              a.nav-title(href="/dashboard") RANIA
+              .sb-sidenav-menu-heading Page Actions
+              a.nav-link(href="/settings") Back to User Info
+              
+              
+          .sb-sidenav-footer
+            .small Logged in as:
+            | UserName
+            button.db-button(type='button' onclick="window.location.href='/'") logout
+      div(id="layoutSidenav_content")
+        main
+          .container-fluid.px-6
+            h1.mt-4 Medical Info
+            .row
+              .col-md-6
+                .card.userInfoCard
+                  .card-body User Information
+                    .card-text
+                      table.userInfo-table
+                        tbody
+                          tr
+                            td Date of Birth:
+                            td 01/01/1999
+                          tr
+                            td Account Creation Date:
+                            td 01/01/2020
+                          tr
+                            td Medical Conditions:
+                            td
+                              if medical_conditions && medical_conditions.length
+                                ul
+                                  each condition in medical_conditions
+                                    li #{condition}
+                              else
+                                | No medical conditions found.
+                          tr
+                            td Medications:
+                            td
+                              if medications && medications.length
+                                ul
+                                  each medication in medications
+                                    li #{medication}
+                              else
+                                | No medications found.
+                          tr
+                            td Emergency Contacts:
+                            td
+                              if emergency_contacts && emergency_contacts.length
+                                ul
+                                  each contact in emergency_contacts
+                                    li #{contact.name} (#{contact.phone})
+                              else
+                                | No emergency contacts found.
+                  .card-footer.d-flex.align-items-center.justify-content-between
+
+  script(
+    crossorigin="anonymous" 
+   
+
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" 
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    )
+ 

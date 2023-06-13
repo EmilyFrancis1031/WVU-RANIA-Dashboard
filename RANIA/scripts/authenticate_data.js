@@ -5,7 +5,7 @@
 var TinyDB = require("tinydb");
 const dotenv = require("dotenv").config();
 const acl_path = dotenv.DB_ACL;
-async function authenticate_data(data_packet) {
+function authenticate_data(data_packet) {
   var errorcode = 100;
   //console.log(process.env.DB_ACL)
 

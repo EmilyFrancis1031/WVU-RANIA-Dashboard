@@ -1,15 +1,95 @@
-extends layout 
-block head 
-    title=title 
 
-block navbar
-    nav 
-        a(href="/welcome") Home
-        a(href="/dashboard") Dashboard
-        a(href="/agenda") Agenda
-        a(href="/settings") Settings
-        a(href="/") Logout
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(
+      content="IE=edge" 
+      http-equiv="X-UA-Compatible"
+      )
+    meta(
+      content="width=device-width, initial-scale=1.0" 
+      name="viewport"
+      )
+    meta(
+      content="" 
+      name="description"
+      )
+    meta(
+      content="" 
+      name="author"
+      )
+    title RANIA Dashboard
+    link(
+      href="../../public/stylesheets/dashboard.css" 
+      rel="stylesheet"
+      )
+  body.sb-nav-fixed
+    #layoutSidenav
+      .mobile-menu
+        input#hamburger(
+          value="hamb" 
+          name="hamb" 
+          type="checkbox"
+          )
+        label(for="hamb") ☰
+        ul.mobile
+          li
+            a.nav-link(href="index.html") Manage Devices
+          li
+            a.nav-link(href="/settings") Edit Resident Info
+          li
+            a.nav-link(href="index.html") Send data to...
+      div(id="layoutSidenav_nav")
+        nav#sidenavAccordion.sb-sidenav.accordion.sb-sidenav-dark
+          .sb-sidenav-menu
+            .nav
+              a.nav-title(href="/dashboard") RANIA
+              .sb-sidenav-menu-heading Page Actions
+              a.nav-link(href="/dashboard") Back to Dashboard
+              
+          .sb-sidenav-footer
+            .small Logged in as:
+            | UserName
+           
+      div(id="layoutSidenav_content")
+        main
+          .container-fluid.px-6
+            h1.mt-4 Calendar Event Add/Remover
+            .row
+              .col-lg-6.col-md-12
+                .card.mb-4
+                  .card-header Add Event
+                  .card-body
+                
+                  
+                  
+                    form#addEventForm()
+                      .form-group
+                        label(for='eventTitle') Event Title
+                        input#eventTitle.form-control( type='text' name='eventTitle' placeholder='Enter event title')
+                      .form-group
+                        label(for='eventDate') Event Date
+                        input#eventDate.form-control(type='date' name='eventDate' placeholder='Enter event date')
+                      .form-group
+                        label(for='eventTime') Event Time
+                        input#eventTime.form-control(type='time' name='eventTime' placeholder='Enter event time')
+                      button.db-button(type='button' onclick="insertData('/data/upsert-data')") Add Event
+                      script(src='/public/scripts/call_insert_data.js')
+              .col-lg-6.col-md-12
+                .card.mb-4
+                  .card-header Remove Event
+                  .card-body
+                    form#removeEventForm
+                      .form-group
+                        label(for='eventTitle') Event Title
+                        input#eventTitle.form-control(type='text' name='eventTitle' placeholder='Enter event title')
+                      .form-group
+                        label(for='eventDate') Event Date
+                        input#eventDate.form-control(type='date' name='eventDate')
+                        button.btn.btn-primary(type='submit') Remove Event
+                  .form-group
+                    label(for='eventTime') Event Time
+                    input#eventTime.form-control(type='time' name='eventTime' placeholder='Enter event time')
+                  button.db-button(type='submit') Remove Event
 
-block content
-    h1 The resident's agenda will be displayed on this page.
-    button(type="button") Modify Agenda 
+  // Path: RANIA\views\Agenda\agenda.pug

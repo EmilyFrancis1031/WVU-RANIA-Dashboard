@@ -1,47 +1,24 @@
 //calls tiny_db get
-var TinyDB = require("tinydb");
+const build_db_path = require("../helper_scripts/build_db_path");
+const check_file_exists = require("../helper_scripts/check_file_exists")
+const read_file = require("../helper_scripts/read_file")
+const parse_json = require("../helper_scripts/parse_json");
 
 async function get_data(data_packet) {
-  var errorcode = 310;
+  var response_code = 310;
 
-  db_path =
-    process.env.DB_DEVICE_ROOT_PATH +
-    data_packet["data"]["get"] +
-    "/" +
-    data_packet["data"]["get"] +
-    "_data.json";
+  var path = build_db_path(data_packet["data"]["device_name"], data_packet["data"]["db_name"])
 
-  db = new TinyDB(db_path);
-
-  const dbResult = await new Promise((resolve) => {
-    let result = undefined;
-    db.onReady = function () {
-      db.getInfo("_default", function (err, key, value) {
-        if (err) {
-          console.error(err);
-          errorcode = 310;
-          reject(err);
-        }
-
-        result = { data: value };
-        resolve(result);
-      });
-    };
-  });
-
-  // const resultPromise = new Promise(db.onReady)
-
-  // resultPromise
-  // .then(console.log("[promise_accepted]",result))
-  // .catch(console.log("[promise_rejected]: ",result))
-
-  console.log("[get_data]: ", dbResult);
-  //return to 01
-  if (dbResult == null) {
-    return errorcode;
-  } else {
-    return dbResult;
+  var db_file_exists = await check_file_exists(path)
+  if(db_file_exists){
+    var data = await read_file(path)
+    var jsondata = parse_json(data)
+    response_code = jsondata
   }
+  else{
+    response_code = 311
+  }
+  return response_code;
 }
 
 module.exports = get_data;

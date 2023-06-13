@@ -1,0 +1,186 @@
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(
+      content="IE=edge" 
+      http-equiv="X-UA-Compatible"
+      )
+    meta(
+      content="width=device-width, initial-scale=1.0" 
+      name="viewport"
+      )
+    meta(
+      content="" 
+      name="description"
+      )
+    meta(
+      content="" 
+      name="author"
+      )
+    title User Info
+    link(
+      href="../../public/stylesheets/dashboard.css" 
+      rel="stylesheet"
+      )
+    script.
+      function submitCode(deviceName, alias, code){
+        fetch('/data/connect-device',{
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({meta_data:{
+                    auth_token: "01",
+                    sender: "Localhost",
+                  },
+                 data:{
+                  device_name: deviceName,
+                  alias: alias,
+                  auth_code: code
+        }})
+      })
+          .then(response => response.json())
+          .then(data=> alert(data))
+      }
+      function rejectDevice(deviceName){
+        fetch('/data/remove_data',{
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({meta_data:{
+                    auth_token: "01",
+                    sender: "Localhost",
+                  },
+                 data:{
+                  device_name: "acl",
+                  db_name: "pending_connections",
+                  k: deviceName
+                 }})
+      })
+          .then(response => response.json())
+          .then(data=> alert(data))
+      }
+      function populatePendingDevices(data){
+        const table = document.getElementById('pending-conns-table');
+        console.log("[populateDevices]: "+ JSON.stringify(data));
+        const row = table.insertRow(-1);
+        for (const key in data) {
+          
+          var aliasCell = row.insertCell(0);
+          aliasCell.innerHTML=data[key].alias
+
+          var connCodeCell = row.insertCell()
+          var connCodeForm = document.createElement('input');
+          connCodeForm.type = 'text'
+          connCodeForm.name = 'ConnectionCode'
+          connCodeCell.appendChild(connCodeForm)
+
+          var submitCell = row.insertCell()
+          var submitBtn = document.createElement('button');
+          submitBtn.textContent = "Submit"
+          submitCell.appendChild(submitBtn);
+          submitBtn.addEventListener('click', function() {
+            const connCodeValue = connCodeForm.value;
+            const deviceName = key
+            const alias = data[key].alias
+            submitCode(key, alias, connCodeValue)
+            //console.log('Submitted connection code:', connCodeValue);
+            // Perform any further processing with the connection code value
+          });
+
+          var rejectCell = row.insertCell()
+          var rejectBtn = document.createElement('button');
+          rejectBtn.textContent = "Reject"
+          rejectCell.appendChild(rejectBtn);
+          rejectCell.addEventListener('click', function() {
+            rejectDevice(key)
+            //console.log('Submitted connection code:', connCodeValue);
+            // Perform any further processing with the connection code value
+          });
+   
+        };
+      };
+      async function getPendingDevices(){
+        fetch('/data/get-data',{
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({meta_data:{
+                    auth_token: "01",
+                    sender: "Localhost",
+                  },
+                 data:{
+                  device_name: 'acl',
+                  db_name: 'pending_connections',
+                 }})
+      })
+          .then(response => response.json())
+          .then(data=> populatePendingDevices(data))
+      }
+      function loadDashboard(){
+          getDevices();
+          
+        }
+        window.onload = function(){
+          loadDashboard();
+        }
+  body.sb-nav-fixed
+    #layoutSidenav
+      .mobile-menu
+        input#hamburger(
+          value="hamb" 
+          name="hamb" 
+          type="checkbox"
+          )
+        label(for="hamb") ☰
+        ul.mobile
+          li
+            a.nav-link(href="/dashboard") Dashboard
+          li
+            a.nav-link(href="index.html") Edit Medical Conditions
+      div(id="layoutSidenav_nav")
+        nav#sidenavAccordion.sb-sidenav.accordion.sb-sidenav-dark
+          .sb-sidenav-menu
+            .nav
+              a.nav-title RANIA
+              a.nav-link(href="/dashboard") Dashboard
+              a.nav-link-active Manage Devices
+              //- a.nav-link(href="/settings") User Info
+              //- a.nav-link(href="/agenda") Manage Your Agenda
+          
+          .sb-sidenav-footer
+            .small Logged in as:
+            | UserName
+            button.db-button(type='button' onclick="window.location.href='/'") logout
+      div(id="layoutSidenav_content")
+        main
+          .container-fluid.px-6
+            h1.mt-4 Pending Connections
+            .row
+              .col-md-6
+                .card.userInfoCard
+                  .card-body 
+                    .card-text
+                      table.userInfo-table#pending-conns-table
+                        tbody
+                          tr
+                            th Device Name
+                            th Connection Code
+                            th Accept
+                            th Reject
+                          tr
+                            td Example
+                            td
+                              input(type="text", name="ConnectionCode")
+                            td 
+                              button(type="button") Submit
+                            td
+                              button(type="button") Reject
+
+                          
+                  .card-footer.d-flex.align-items-center.justify-content-between
+
+  script(
+    crossorigin="anonymous" 
+   
+
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" 
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    )
+ 

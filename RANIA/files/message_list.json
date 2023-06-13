@@ -1,12 +1,29 @@
 {
     "0": "Success",
-
     "1": "Undefined error",
+
+    "10": "Error Parsing JSON",
+    "11": "JSON successfully parsed",
+    "15": "Successfully wrote to file",
+    "16": "Error writing to file",
+    "20": "Successfully read file",
+    "21": "Error in reading file",
 
     "100": "Error in authentication",
     "101": "Authentication Successful",
     "102": "Error accessing Access Control List",
     "103": "Access Refused",
+
+    "110": "Error Connecting Device",
+    "111": "Device Connected Successfully",
+    "112": "Device Already Connected",
+    "113": "Device Connection Pending",
+    "114": "Device Connection Refused",
+    "115": "ACL could not be found",
+
+    "120": "Error Disconnecting Device",
+    "121": "Device Successfully Disconnected",
+    "122": "That device was not connected",
 
     "200": "Error in validating data_packet structure",
     "201": "Validation Successful",
@@ -16,10 +33,22 @@
     "205": "data_packet['data'] is missing",
 
     "300": "Error processing instruction",
-
     "310": "Error getting data",
+    "311": "Database does not exist, could not get data",
 
-    "320": "Error updating data",
+    "330": "Error upserting data",
+    "331": "Data upserted Successfully",
+    "332": "Database does not exists, counld not upsert data",
+    "333": "Error Parsing JSON data",
 
-    "330": "Error insertin data"
+    "340": "Error creating Database",
+    "341": "Database Created and added to meta_data Successfully",
+    "342": "Database Already Exists",
+    "343": "meta_data file does not exist for this device",
+    "344": "Error parsing meta_data for this device",
+    "345": "Error updating meta_data for this device",
+    
+    "350": "Error destroying database",
+    "351": "Database Destroyed Successfully and removed from meta_data",
+    "352": "Database does not exists, could not be destroyed"
 }

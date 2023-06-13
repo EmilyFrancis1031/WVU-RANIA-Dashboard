@@ -1,0 +1,59 @@
+.mobile {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    width: 100%;
+    margin: 0 auto;
+    transform: translateY(-300px);
+    transition: all 0.5s ease-in-out;
+    text-align: center;
+    background: #1C2B39;
+}
+
+.mobile li {
+    padding-top: 10px;
+}
+
+.mobile-menu {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    label {
+        display: block;
+        z-index: 4;
+    }
+
+    .list-inline {
+        display: none;
+    }
+
+    .mobile {
+        padding: 0px 0;
+    }
+
+    .mobile-menu {
+        display: block;
+        position: absolute;
+        z-index: 1000;
+    }
+
+    .mobile li a {
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+        color: #FFE539;
+    }
+
+    .mobile li a:hover {
+        color: #BEB7B3;
+    }
+
+    #hamburger {
+        cursor: pointer;
+    }
+
+    input[type=checkbox]:checked~ul.mobile {
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,33 @@
+:root {
+    --card-bg: #1C2B39;
+    --nav-bg: #EAAA00;
+    --nav-footer-bg: #F7F7F7;
+    --background-image: url('../images/topo2.png');
+    /* Adjust as needed */
+    --background-position: center center;
+    /* Adjust as needed */
+    --button-hover-bg: #EAAA00;
+    --button-hover-border: #EAAA00;
+    --button-hover-text: #1C2B39;
+    --bs-primary-rgb: #1c2b39;
+    --bs-secondary-rgb: #1c2b39;
+    --bs-success-rgb: #1c2b39;
+    --bs-info-rgb: #1c2b39;
+    --bs-warning-rgb: #1c2b39;
+    --bs-danger-rgb: #1c2b39;
+    --bs-light-rgb: #1c2b39;
+    --bs-dark-rgb: #1c2b39;
+    --bs-white-rgb: #ffe539;
+    --bs-black-rgb: 0, 0, 0;
+    --bs-body-color-rgb: 0, 0, 0;
+    --bs-body-bg-rgb: #000000;
+    --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+    --bs-body-font-family: var(--bs-font-sans-serif);
+    --bs-body-font-size: 1rem;
+    --bs-body-font-weight: 400;
+    --bs-body-line-height: 1.5;
+    --bs-body-color: #ffe539;
+    --bs-body-bg: #0062A3;
+}
