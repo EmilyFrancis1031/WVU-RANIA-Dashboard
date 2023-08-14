@@ -17,7 +17,8 @@
     "nodemailer": "^6.9.2",
     "popup": "^0.0.3",
     "pug": "^3.0.2",
-    "tinydb": "^0.1.0"
+    "tinydb": "^0.1.0",
+    "ws": "^8.13.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"

@@ -1,4 +1,4 @@
-function delete_key_from_json(json_data){
+function delete_key_from_json(json_data, data_packet){
   if (json_data.hasOwnProperty(data_packet["data"]["k"])) {
 
     delete json_data[data_packet["data"]["k"]];

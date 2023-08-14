@@ -2,7 +2,7 @@ const fs = require('fs');
 
 function read_file(filePath) {
   return new Promise((resolve, reject) => {
-    console.log("[Reading File]: ", filePath)
+    //console.log("[Reading File]: ", filePath)
     fs.readFile(filePath, 'utf8', (err, data) => {
       if (err) {
         resolve(21);

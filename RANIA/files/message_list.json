@@ -36,6 +36,9 @@
     "310": "Error getting data",
     "311": "Database does not exist, could not get data",
 
+    "320": "Error removing data",
+    "321": "Data successfully removed",
+
     "330": "Error upserting data",
     "331": "Data upserted Successfully",
     "332": "Database does not exists, counld not upsert data",
@@ -50,5 +53,9 @@
     
     "350": "Error destroying database",
     "351": "Database Destroyed Successfully and removed from meta_data",
-    "352": "Database does not exists, could not be destroyed"
+    "352": "Database does not exists, could not be destroyed",
+
+    "360": "Error appending data",
+    "361": "Data successfully appended",
+    "362": "Database does not exists, could not be appended"
 }

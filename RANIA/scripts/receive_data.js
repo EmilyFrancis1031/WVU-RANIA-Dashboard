@@ -11,7 +11,7 @@ const dotenv = require("dotenv").config();
 //import * from './data_scripts'
 
 async function receive_data(data_packet, instruction) {
-  console.log("instruction: ", instruction);
+  //console.log("instruction: ", instruction);
 
   var errorcode = 0;
   var result = null;
@@ -33,9 +33,9 @@ async function receive_data(data_packet, instruction) {
       //if validated and authenticated, call instruction in data_packet
       //see boxes 20-29
       //call instruction passed in by data route
-      console.log("Call Function");
+      //console.log("Call Function");
       result = await instruction(data_packet);
-      console.log("[receive_data: result]", result);
+      //console.log("[receive_data: result]", result);
       //return result;
     } else {
       //      set errorcode
@@ -52,7 +52,7 @@ async function receive_data(data_packet, instruction) {
   } else {
     returnItem = result;
   }
-  console.log("[returnItem: ]", returnItem);
+  //console.log("[returnItem: ]", returnItem);
   return returnItem;
 }
 

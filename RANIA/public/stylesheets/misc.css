@@ -228,8 +228,7 @@
 }
 
 .px-6 {
-    padding-right: 11rem !important;
-    padding-left: 11rem !important;
+    padding-left: 5rem !important;
 }
 
 @media screen and (max-width:992px) {

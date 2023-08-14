@@ -38,7 +38,7 @@ async function connect_device(data_packet) {
           auth_code+
           "\n\nIf you did not initiate this request, please ignore this email."
           )
-          response_code == 113
+          response_code = 113
         }
         else{
           if (deviceToAdd.auth_code == json_pending_conns_data[deviceToAdd.device_name]["auth_code"]) {
@@ -67,21 +67,21 @@ async function connect_device(data_packet) {
             delete json_pending_conns_data[deviceToAdd.device_name]
             console.log(json_pending_conns_data)
             write_to_file(pending_conns_path, json_pending_conns_data)
-            response_code == 111
+            response_code = 111;
           }
           else{
-            response_code == 114
+            response_code = 114;
           }
         }
 
       }
     }
     else{
-      response_code = 112
+      response_code = 112;
     } 
   }
   else{
-    response_code = 115
+    response_code = 115;
   }
   return response_code; //return to 01
 }

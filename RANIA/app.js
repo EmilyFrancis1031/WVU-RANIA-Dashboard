@@ -1,10 +1,10 @@
 var createError = require("http-errors");
 var express = require("express");
+const http = require('http');
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-var TinyDB = require("tinydb");
-test_db = new TinyDB("./test.db");
+const WebSocket = require('ws');
 
 // Routes
 var indexRouter = require("./routes/index");
