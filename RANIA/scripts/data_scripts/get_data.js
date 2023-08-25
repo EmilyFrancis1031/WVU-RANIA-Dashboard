@@ -14,7 +14,7 @@ async function get_data(data_packet) {
     var data = await read_file(path)
     var jsondata = parse_json(data)
     if (jsondata.hasOwnProperty(data_packet["data"]["k"])) {
-      response_code = jsondata["k"]
+      response_code = jsondata[data_packet["data"]["k"]]
     } else {
       response_code = jsondata
     }
