@@ -13,7 +13,12 @@ async function get_data(data_packet) {
   if(db_file_exists){
     var data = await read_file(path)
     var jsondata = parse_json(data)
-    response_code = jsondata
+    if (jsondata.hasOwnProperty(data_packet["data"]["k"])) {
+      response_code = jsondata["k"]
+    } else {
+      response_code = jsondata
+    }
+    
   }
   else{
     response_code = 311
