@@ -9,6 +9,9 @@
     "20": "Successfully read file",
     "21": "Error in reading file",
 
+    "30": "Key successfully removed from data",
+    "31": "Key not found in data,x Could not be removed",
+
     "100": "Error in authentication",
     "101": "Authentication Successful",
     "102": "Error accessing Access Control List",

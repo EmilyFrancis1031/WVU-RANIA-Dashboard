@@ -1,14 +1,14 @@
 function delete_key_from_json(json_data, data_packet){
+  var response_code = 31;
   if (json_data.hasOwnProperty(data_packet["data"]["k"])) {
 
     delete json_data[data_packet["data"]["k"]];
 
-    console.log(`Key "${data_packet["data"]["k"]}" deleted successfully from ${db_path}.`);
-    response_code = 301
+    response_code = 30
   } else {
-    console.log(`Key "${data_packet["data"]["k"]}" not found in ${db_path}. No changes made.`);
+    response_code = 31
   }
-  return json_data
+  return response_code
 }
 
 module.exports = delete_key_from_json
