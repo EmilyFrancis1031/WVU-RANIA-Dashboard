@@ -11,7 +11,7 @@ while True:
         print("Say something!")
 
         # Adjust the listening timeout and phrase time limit for faster response
-        audio = r.listen(source, timeout=3)  # Adjust these values as needed
+        audio = r.listen(source, timeout=2.5)  # Adjust these values as needed
 
     print("Processing...")
 
