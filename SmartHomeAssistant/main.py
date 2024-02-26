@@ -4,32 +4,36 @@ import speech_recognition as sr
 from dotenv import load_dotenv
 import google.generativeai as genai
 
-
+# Load environment variables
 load_dotenv()
 
+# Initialize recognizer and Whisper model
 r = sr.Recognizer()
-whisper_model = whisper.load_model('tiny')
+whisper_model = whisper.load_model("tiny")
 
-genai.configure(api_key=os.environ.get('GOOGLE_API_KEY'))
-llm_model = genai.GenerativeModel('gemini-pro')
+# Configure Google API for LLM
+genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
+llm_model = genai.GenerativeModel("gemini-pro")
 
 while True:
     with sr.Microphone() as source:
-        print("Ask bard:")
-
-        # Adjust the listening timeout and phrase time limit for faster response
-        audio = r.listen(source, timeout=2.5)  # Adjust these values as needed
+        print("Ask Bard:")
+        try:
+            audio = r.listen(source, timeout=5)
+        except sr.WaitTimeoutError:
+            print("Listening timed out while waiting for phrase to start")
+            continue  # Skip to the next iteration if user doesn't start speaking
 
     print("Processing speech to text...")
 
-    # Save the audio to a file
+    # Save local audio
     with open("microphone.wav", "wb") as f:
         f.write(audio.get_wav_data())
 
+    # Transcribe the spoken words from the user
     result = whisper_model.transcribe("microphone.wav")
-
     print(f'Asking Bard: "{result["text"]}"')
 
-    response = llm_model.generate_content(result['text'])
-
+    # Generate response from LLM
+    response = llm_model.generate_content(result["text"])
     print(response.text)
