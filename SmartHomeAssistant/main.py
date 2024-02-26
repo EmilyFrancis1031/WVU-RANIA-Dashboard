@@ -14,6 +14,7 @@ whisper_model = whisper.load_model("tiny")
 # Configure Google API for LLM
 genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
 llm_model = genai.GenerativeModel("gemini-pro")
+conversation = llm_model.start_chat(history=[])
 
 while True:
     with sr.Microphone() as source:
@@ -35,5 +36,5 @@ while True:
     print(f'Asking Bard: "{result["text"]}"')
 
     # Generate response from LLM
-    response = llm_model.generate_content(result["text"])
-    print(response.text)
+    response = conversation.send_message(result["text"])
+    print(conversation.last.text)
