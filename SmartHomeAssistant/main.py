@@ -18,6 +18,7 @@ conversation = llm_model.start_chat(history=[])
 
 while True:
     with sr.Microphone() as source:
+        r.adjust_for_ambient_noise(source, duration=1)
         print("Ask Bard:")
         try:
             audio = r.listen(source, timeout=5)
