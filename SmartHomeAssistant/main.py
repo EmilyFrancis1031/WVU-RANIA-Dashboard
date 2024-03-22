@@ -1,4 +1,5 @@
 import os
+import geocoder
 
 import google.generativeai as genai
 import speech_recognition as sr
@@ -11,17 +12,20 @@ from datetime import date
 # Load environment variables
 load_dotenv()
 
+# Get the location based on ip
+location = geocoder.ip('me')
+
+# Initialize DuckDuckGo search
+search = DuckDuckGoSearchRun()
+
 # Initialize recognizer and Whisper model
 r = sr.Recognizer()
 whisper_model = whisper.load_model("tiny")
-search = DuckDuckGoSearchRun()
 
 # Configure Google API for LLM
 genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
-llm_model = genai.GenerativeModel("gemini-pro")
+llm_model = genai.GenerativeModel("gemini-1.0-pro-latest")
 conversation = llm_model.start_chat(history=[])
-
-conversation.send_message('Unless otherwise specified, the location is Morgantown, West Virginia')
 
 # while True:
 #     with sr.Microphone() as source:
@@ -47,25 +51,29 @@ conversation.send_message('Unless otherwise specified, the location is Morgantow
 #     response = conversation.send_message(result["text"])
 #     print(conversation.last.text)
 
+
 while True:
     query = input("Ask bard: ")
 
-    duckduckgo_results = search.run(f'{query}')
-    today = date.today()
-
     query = f'''
-    The current date is {today.strftime("%A, %B %d, %Y")}.
+    You will receive a query that you must answer as good as possible.
+    Your answer will be based on the current date, location, conversation
+    history, and what you know.
     
-    Here are the results of a DuckDuckGo search: ${duckduckgo_results}
+    The current date is {date.today().strftime('%A, %B %d, %Y')}.
     
-    Using what you know and these results respond to the message below. 
-    If the DuckDuckGo search does not provide enough information you may 
+    The location is {location.address}.
+    
+    Here are the results of a DuckDuckGo search: ${search.run(f'{query}')}
+
+    Using what you know and these results respond to the message below.
+    If the DuckDuckGo search does not provide enough information you may
     ignore the results and give an answer using other messages from this
-    conversation. Do not mention the DuckDuckGo search in your response
+    conversation. Do not mention the DuckDuckGo at all in your response
     in any way and respond as concisely as possible while still using
     full sentences.
-    
-    ${query}'''
+
+    Query: ${query}'''
 
     try:
         # TODO: Adjust permission level. It is currently set to allow all
@@ -82,5 +90,6 @@ while True:
 
         print()
     except Exception as e:
+        print(e)
         # TODO: Improve error handling
         print('An unexpected error has occurred. Please try again.')
