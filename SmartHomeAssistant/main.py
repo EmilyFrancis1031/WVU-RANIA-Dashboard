@@ -72,6 +72,19 @@ while True:
     conversation. Do not mention the DuckDuckGo at all in your response
     in any way and respond as concisely as possible while still using
     full sentences.
+    
+    Format your response as JSON and structure it as shown below:
+    {{
+        "type": "answer" | "task" | "cancel",
+        "response": {{
+            "text": "Insert your answer to the query here if the type is set to answer",
+        }}
+    }}
+    
+    Set the type to answer if the user is asking you something or chatting conversationally.
+    Set the type to task if the user is asking you to perform a task.
+    Set the type to cancel if the user no longer wishes to continue the conversation.
+    Examples of cancel would be "Nevermind", "Stop", or anything similar.
 
     Query: ${query}'''
 
