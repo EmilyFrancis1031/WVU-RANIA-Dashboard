@@ -44,13 +44,15 @@ function createBars(analyser) {
 }
 
 function animate(analyser, dataArray) {
+  const minBarHeight = window.innerWidth / dataArray.length - 1;
+
   analyser.getByteFrequencyData(dataArray);
   heights = interpolate(logScale(dataArray));
 
   for (let i = 0; i < analyser.frequencyBinCount; i++) {
     const bar = audioVisualizer.childNodes[i];
 
-    bar.style.height = `${heights[i]}px`;
+    bar.style.height = `${Math.max(heights[i], minBarHeight)}px`;
   }
 
   requestAnimationFrame(() => animate(analyser, dataArray));

@@ -14,7 +14,6 @@ body {
 
 .audio-bar {
   flex: 1;
-  min-height: 18.33px;
   background-color: white;
   border-radius: 100vw;
 }
